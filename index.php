@@ -57,7 +57,7 @@
             <img src="/image/img1.jpg" alt="Image 3">
         </div>
         <div id="imagetext-text">
-            <h3>Elevate Your Wardrobe with Just a Click!</h3>
+            <h3>Elevate Your Wardrobe with Just a Click! NONONONONOO</h3>
             <button><a href="#">Shop now! Ng Wei Quan BABI</a></button>
         </div>
 
