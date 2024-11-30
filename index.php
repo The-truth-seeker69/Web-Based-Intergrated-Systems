@@ -58,7 +58,7 @@
         </div>
         <div id="imagetext-text">
             <h3>Elevate Your Wardrobe with Just a Click!</h3>
-            <button><a href="#">Shop now! noweoroweoroweroo</a></button>
+            <button><a href="#">Shop now! Ng Wei Quan GAY</a></button>
         </div>
 
     </div>
