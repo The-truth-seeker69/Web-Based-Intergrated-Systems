@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* Footer Styles */
+.footer {
+    background-color: #000;
+    color: white;
+    padding: 40px 20px;
+    font-family: 'Playfair Display', serif;
+
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 300px;
+
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section a {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #ccc;
+}
+
+.footer-section ul li a:hover {
+    color: #f39c12;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 16px;
+}
+
+.social-links a:hover {
+    color: #f39c12;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}

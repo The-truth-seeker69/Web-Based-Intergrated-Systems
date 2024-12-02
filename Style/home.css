@@ -1,3 +1,4 @@
+
 * {
     padding: 0;
     margin: 0;
@@ -13,7 +14,7 @@ a {
     max-width: 100%;
     margin: auto;
     overflow: hidden;
-    height: 100vh;
+    height: 90vh;
 }
 
 .slides::before {
@@ -27,6 +28,7 @@ a {
 }
 
 .slides {
+    position: relative;
     display: none;
     text-align: center;
 }
@@ -34,7 +36,24 @@ a {
 .slides img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+
+}
+
+.slide-text {
+    position: absolute;
+    bottom: 20px;
+    /* Position the text near the bottom of the slide */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Semi-transparent background */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    z-index: 1;
 }
 
 .prev,

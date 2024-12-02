@@ -1,0 +1,56 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: black;
+    color: white;
+    height: 10vh;
+
+}
+
+header #header-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    /* background-color: #f39c12; */
+    width: 30%;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+
+}
+
+.nav-links a:hover {
+    color: #f39c12;
+}
+
+li {
+    list-style: none;
+}
+
+
+header a {
+    color: white;
+}
+
+#header-utility {
+    width: 15%;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
