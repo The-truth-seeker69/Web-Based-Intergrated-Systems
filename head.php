@@ -23,7 +23,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="#">Home</a></li>
-                    <li><a href="../Admin/a_home.php">Product</a></li>
+                    <li><a href="../Admin/product.php">Product</a></li>
                     <li><a href="../Admin/order.php">Order</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
