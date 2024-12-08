@@ -166,7 +166,7 @@ $_orderStatus = [
 
 //remember to change
 //
-$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categryDesc <> "Inactive"')
+$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categoryDesc <> "Inactive"')
                  ->fetchAll(PDO::FETCH_KEY_PAIR);
 
 
