@@ -88,7 +88,7 @@ $images = $stm1->fetchAll();
     <section>
         <button>Submit</button>
         <button type="reset">Reset</button>
-        <button type="button" onclick="window.location.href='a_home.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
+        <button type="button" onclick="window.location.href='product.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
     </section>
 </form>
     
@@ -111,7 +111,7 @@ $baseURL = '../image/';
     <?= err('prodPicture') ?>  -->
 
     <section>
-        <button type="button" onclick="window.location.href='a_home.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
+        <button type="button" onclick="window.location.href='product.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
     </section>
 </form>
 

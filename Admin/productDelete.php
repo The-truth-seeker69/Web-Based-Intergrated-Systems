@@ -10,7 +10,7 @@ $stm = $_db->prepare('UPDATE product SET prodStatus = "OutOfStock" WHERE prodID 
 $stm->execute([$prodID]);
 
 if($stm){
-    redirect('a_home.php');
+    redirect('product.php');
 }
 ?>
 <div id="info"><?= temp('info') ?></div>

@@ -129,7 +129,7 @@ foreach ($files['name'] as $key => $fileName) {
         }
         if (!$_err) {
             temp('info', 'Product and images inserted successfully');
-            redirect('a_home.php');
+            redirect('product.php');
         }
     }
 }
@@ -177,7 +177,7 @@ foreach ($files['name'] as $key => $fileName) {
     <section>
         <button>Submit</button>
         <button type="reset">Reset</button>
-        <button type="button" onclick="window.location.href='a_home.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
+        <button type="button" onclick="window.location.href='product.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
     </section>
 </form>
 

@@ -14,7 +14,7 @@ if ($stock > 0) {
     $stm = $_db->prepare('UPDATE product SET prodStatus = "Available" WHERE prodID = ?');
     $stm->execute([$prodID]);
 
-   redirect('a_home.php');
+   redirect('product.php');
 } else {
     // Handle the case where stock is 0
     temp('info', 'Cannot set product status to Available because stock is 0');
