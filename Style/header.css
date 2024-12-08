@@ -54,3 +54,128 @@ header a {
     justify-content: space-around;
     align-items: center;
 }
+
+/* Cart UI Styling */
+.cart-ui {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100vh;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.cart-ui.hidden {
+    display: none;
+}
+
+.cart-ui h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #928b8bd8;
+    padding-bottom: 30px;
+    margin-right: 20px;
+    gap: 10px; /* Added gap for better spacing */
+}
+
+.cart-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.cart-item img {
+    width: 100px; /* Updated image size */
+    height: 100px;
+    margin-right: 10px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qty-btn {
+    width: 20px; /* Reduced button size */
+    height: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.item-quantity input {
+    width: 35px; /* Reduced width of quantity field */
+    height: 20px; /* Adjusted height */
+    text-align: center;
+    font-size: 14px;
+}
+
+.item-price {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cart-summary p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.checkout-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-cart {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.item-name{
+    color: black;
+}
+
