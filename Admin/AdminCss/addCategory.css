@@ -1,0 +1,88 @@
+/* Basic form container */
+.categoryForm {
+    width: 100%;
+    max-width: 500px;  
+    margin: 0 auto;    
+    padding: 20px;
+    background-color: #f9f9f9; 
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+}
+
+/* Label styling */
+.categoryForm label {
+    display: block;         
+    font-weight: bold;     
+    margin-bottom: 5px;     
+    font-size: 14px;        
+}
+
+/* Input field styles */
+.categoryForm input[type="text"], 
+.categoryForm input[type="radio"], 
+.categoryForm input[type="number"],
+textarea  {
+    width: 95%;          
+    padding: 10px;         
+    margin-bottom: 8px;  
+    border: 1px solid #ccc; 
+    border-radius: 4px;   
+    font-size: 14px;       
+}
+
+.categoryForm select {
+    width: 100%;          
+    padding: 10px;         
+    margin-bottom: 8px;  
+    border: 1px solid #ccc; 
+    border-radius: 4px;   
+    font-size: 14px;    
+}
+/* Focus effect for inputs */
+.categoryForm input[type="text"]:focus,
+.categoryForm select:focus,
+.categoryForm input[type="radio"]:focus {
+    border-color: #007bff;  
+    outline: none;          
+}
+
+section {
+    display: flex;
+    justify-content: center;  /* Centers the buttons horizontally */
+    gap: 10px;  /* Adds space between the buttons */
+    padding: 20px;  /* Adds some padding around the section */
+    align-items: center;  /* Centers the buttons vertically (optional) */
+}
+
+
+.err {
+    color: red; 
+    margin-top: 2px;           /* Reduce space between input field and error message */
+    margin-bottom: 15px;       /* Keep space below the error message for readability */        
+}
+
+
+#info {
+    position: fixed;
+    color: #fff;
+    background: #666;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 20px;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 999;
+    top: -100px;
+    opacity: 0;
+}
+
+#info:not(:empty) {
+    animation: fade 5s;
+}
+
+@keyframes fade {
+      0% { top: -100px; opacity: 0; }
+     10% { top:  100px; opacity: 1; }
+     90% { top:  100px; opacity: 1; }
+    100% { top: -100px; opacity: 0; }
+}

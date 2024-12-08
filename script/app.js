@@ -32,9 +32,6 @@ $(document).ready(function () {
     });
 });
 
-
-//here is for perform function
-
 $(() => {
     $('[data-get]').on('click', e => {
         e.preventDefault();
@@ -62,4 +59,6 @@ $(() => {
         e.stopImmediatePropagation();
     }
 });
+
+
 });
