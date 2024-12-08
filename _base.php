@@ -166,21 +166,8 @@ $_orderStatus = [
 
 //remember to change
 //
-$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category')
+$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categryDesc <> "Inactive"')
                  ->fetchAll(PDO::FETCH_KEY_PAIR);
 
-// function table_headers($fields, $sort, $dir, $href = ''){
-//     foreach($fields as $k => $v){
-//         $d = 'asc';
-//         $c = '';
-
-//         if($k == $sort) {
-//             $d = $dir == 'asc' ? 'desc' : 'asc';
-//             $c = $dir;
-//         }
-//     }
-
-//     echo "<th><a href='?sort=$k&dir=$d&$href' class='$c'>$v</a></th>";
-// }
 
 ?>
