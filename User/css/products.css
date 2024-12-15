@@ -38,6 +38,18 @@ body {
     border-radius: 8px;
 }
 
+.product-image-container img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+}
+
+.product-image-container img.active {
+    display: block;
+}
+
 .arrow {
     position: absolute;
     top: 50%;
@@ -107,6 +119,13 @@ body {
     align-items: center;
     gap: 10px; 
     padding-left: 180px;
+}
+
+.search-form{
+    margin: 0 auto; 
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
 
 .search-bar input {
