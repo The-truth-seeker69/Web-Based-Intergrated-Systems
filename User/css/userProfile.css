@@ -1,0 +1,96 @@
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #DEF4FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Account Container */
+.account-container {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+}
+
+/* Account Details Header */
+.account-details h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333333;
+}
+
+/* Info Section */
+.info-section {
+    margin: 20px 0;
+}
+
+/* Info Rows */
+.info-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.label {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.value {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333333;
+    /* cursor: not-allowed; */
+}
+
+/* Buttons */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-update {
+    background-color: #89BEF0;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.btn-back {
+    background-color: #89ADF0;
+    color: #ffffff;
+}
+
+/* Button Hover Effects */
+button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .account-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .value {
+        font-size: 14px;
+    }
+}
