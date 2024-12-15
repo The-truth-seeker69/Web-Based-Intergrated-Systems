@@ -17,6 +17,8 @@
 </head>
 
 <body>
+    <!-- Flash message -->
+    <div id="info"><?= temp('info') ?></div>
     <header>
 
 
