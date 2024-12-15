@@ -1,0 +1,79 @@
+/* Table Styling */
+table {
+    width: 100%;                  /* Makes the table take up full width */
+    border-collapse: collapse;    /* Removes gaps between table cells */
+    margin: 20px 0;               /* Adds space above and below the table */
+    font-size: 16px;              /* Sets a readable font size */
+    font-family: Arial, sans-serif; /* Uses a clean, modern font */
+}
+
+th, td {
+    border: 1px solid #ddd;       /* Adds a light border to cells */
+    padding: 8px;                 /* Adds padding inside cells */
+    text-align: left;             /* Aligns text to the left */
+    text-align: center; 
+}
+
+th {
+    background-color: #f4f4f4;    /* Sets a light gray background for headers */
+    color: #333;                  /* Dark text for contrast */
+    font-weight: bold;            /* Emphasizes header text */
+    text-align: center; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;    /* Alternates background for even rows */
+}
+
+tr:hover {
+    background-color: #f1f1f1;    /* Changes background on hover for better readability */
+}
+
+/* Button Styling */
+.topButton {
+    margin-bottom: 20px;         /* Space below buttons */
+}
+
+/* Simple Button Styles */
+.button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    background-color:#79917f;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;       /* Ensures button behavior */
+    margin-right: 10px;          /* Space between buttons */
+}
+
+/* Hover Effect */
+.button:hover {
+    background-color: #4dd66f;
+}
+
+#info {
+    position: fixed;
+    color: #fff;
+    background: #666;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 20px;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 999;
+    top: -100px;
+    opacity: 0;
+}
+
+#info:not(:empty) {
+    animation: fade 5s;
+}
+
+@keyframes fade {
+      0% { top: -100px; opacity: 0; }
+     10% { top:  100px; opacity: 1; }
+     90% { top:  100px; opacity: 1; }
+    100% { top: -100px; opacity: 0; }
+}
