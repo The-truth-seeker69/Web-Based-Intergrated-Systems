@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php @include "../../_base.php" ?>
+<?php @include "_base.php" ?>
 
 <head>
     <meta charset="UTF-8">
@@ -20,8 +22,6 @@
     <!-- Flash message -->
     <div id="info"><?= temp('info') ?></div>
     <header>
-
-
         <div id="header-brand">
             <h1><a href="/">Unpopular </a></h1>
         </div>
@@ -94,10 +94,7 @@
             <a href="javascript:void(0)" class="nav-item" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
             </a>
-
-
         </div>
-
     </header>
 
     </nav>
