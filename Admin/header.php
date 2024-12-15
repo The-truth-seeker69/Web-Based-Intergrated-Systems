@@ -1,3 +1,9 @@
+<?php
+
+require __DIR__ . '/../base.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +15,7 @@
     <link rel="stylesheet" href="/Style/admin/home.css">
     <link rel="stylesheet" href="/Style/general/genaral.css">
     <link rel="stylesheet" href="/Style/admin/memberView.css">
+    <link rel="stylesheet" href="/Style/admin/viewAdminProfile.css">
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -18,8 +25,8 @@
 </head>
 
 <body>
-    <header>
 
+    <header>
 
         <div id="header-brand">
             <h1><a href="/Admin/home.php">Unpopular </a></h1>
@@ -35,8 +42,15 @@
 
 
         </ul>
+        <?php if ($_user): ?>
+            <div id="profile-pic">
+                <img src="/image/admin/uploads/<?= $_user->adminPic ?>" alt=" Profile Picture">
+                <ul class="dropdown-menu">
+                    <li><a href="/Admin/pages/viewAdminProfile.php">View Profile</a></li>
+                    <li><a href="/Admin/pages/editAdminProfile.php">Edit Profile</a></li>
+                    <li><a href="/Admin/pages/adminLogout.php">Logout</a></li>
+                </ul>
+            </div>
+        <?php endif ?>
 
-        <div id="profile-pic">
-            <img src="../image/admin/display/admin.png" alt="Profile Picture">
-        </div>
     </header>

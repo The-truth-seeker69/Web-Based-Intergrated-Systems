@@ -27,7 +27,7 @@
         if ($admin) {
             $_SESSION['adminId'] = $admin->adminID;
             $_SESSION['adminName'] = $admin->adminName;
-            redirect('index.php');
+            redirect('../home.php');
         }
     }
 
@@ -60,6 +60,8 @@
                 $stm = $_db->prepare('SELECT * FROM admin WHERE adminname=?');
                 $stm->execute([$name]);
                 $admin = $stm->fetch();
+                temp('info', 'Login successfully');
+                login($admin);
 
                 if ($admin) {
                     $dbpass = $admin->adminPassword;
@@ -76,7 +78,7 @@
                             $stm->execute([$remember_token, $admin->adminID]);
                             setcookie('remember_token_admin', $remember_token, time() + (15 * 60), '/', '', true, true); //15minutes http only cookie
                         }
-                        redirect('../index.php');
+                        redirect('../home.php');
                     }
                 }
             } else { //username dont exist
@@ -118,7 +120,7 @@
     <div id="signupLink">
 
         <div>or</div>
-        <div id="back"><a href="index.php">Back To Home</a></div>
+        <div id="back"><a href="home.php">Back To Home</a></div>
     </div>
 
 </body>

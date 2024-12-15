@@ -1,6 +1,8 @@
 <?php
+session_start();
+include "../Admin/header.php";
 
-include "../Admin/header.php" ?>
+?>
 
 
 </body>

@@ -28,40 +28,40 @@
 class SimpleImage
 {
     public const
-        ERR_FILE_NOT_FOUND = 1;
+      ERR_FILE_NOT_FOUND = 1;
 
     public const
-        ERR_FONT_FILE = 2;
+      ERR_FONT_FILE = 2;
 
     public const
-        ERR_FREETYPE_NOT_ENABLED = 3;
+      ERR_FREETYPE_NOT_ENABLED = 3;
 
     public const
-        ERR_GD_NOT_ENABLED = 4;
+      ERR_GD_NOT_ENABLED = 4;
 
     public const
-        ERR_INVALID_COLOR = 5;
+      ERR_INVALID_COLOR = 5;
 
     public const
-        ERR_INVALID_DATA_URI = 6;
+      ERR_INVALID_DATA_URI = 6;
 
     public const
-        ERR_INVALID_IMAGE = 7;
+      ERR_INVALID_IMAGE = 7;
 
     public const
-        ERR_LIB_NOT_LOADED = 8;
+      ERR_LIB_NOT_LOADED = 8;
 
     public const
-        ERR_UNSUPPORTED_FORMAT = 9;
+      ERR_UNSUPPORTED_FORMAT = 9;
 
     public const
-        ERR_WEBP_NOT_ENABLED = 10;
+      ERR_WEBP_NOT_ENABLED = 10;
 
     public const
-        ERR_WRITE = 11;
+      ERR_WRITE = 11;
 
     public const
-        ERR_INVALID_FLAG = 12;
+      ERR_INVALID_FLAG = 12;
 
     protected array $flags;
 
@@ -196,7 +196,7 @@ class SimpleImage
         $this->mimeType = $matches[1];
         if (! preg_match('/^image\/(gif|jpeg|png)$/', $this->mimeType)) {
             throw new Exception(
-                'Unsupported format: ' . $this->mimeType,
+                'Unsupported format: '.$this->mimeType,
                 self::ERR_UNSUPPORTED_FORMAT
             );
         }
@@ -221,7 +221,7 @@ class SimpleImage
      */
     public function fromFile(string $file): static
     {
-        // Set fopen options.
+    // Set fopen options.
         $sslVerify = $this->getFlag('sslVerify'); // Don't perform peer validation when true
         $opts = [
             'ssl' => [
@@ -247,10 +247,10 @@ class SimpleImage
         $this->mimeType = $info['mime'];
 
         if (! $this->image) {
-            throw new Exception('Unsupported format: ' . $this->mimeType, self::ERR_UNSUPPORTED_FORMAT);
+            throw new Exception('Unsupported format: '.$this->mimeType, self::ERR_UNSUPPORTED_FORMAT);
         }
 
-        switch ($this->mimeType) {
+        switch($this->mimeType) {
             case 'image/gif':
                 // Copy the gif over to a true color image to preserve its transparency. This is a
                 // workaround to prevent imagepalettetotruecolor() from borking transparency.
@@ -268,7 +268,7 @@ class SimpleImage
             case 'image/jpeg':
                 // Load exif data from JPEG images
                 if (function_exists('exif_read_data')) {
-                    $this->exif = @exif_read_data('data://image/jpeg;base64,' . base64_encode($file));
+                    $this->exif = @exif_read_data('data://image/jpeg;base64,'.base64_encode($file));
                 }
                 break;
         }
@@ -315,7 +315,7 @@ class SimpleImage
      */
     public function fromString(string $string): SimpleImage|static
     {
-        return $this->fromFile('data://;base64,' . base64_encode($string));
+        return $this->fromFile('data://;base64,'.base64_encode($string));
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -373,7 +373,7 @@ class SimpleImage
         ob_start();
 
         // Generate the image
-        switch ($mimeType) {
+        switch($mimeType) {
             case 'image/gif':
                 imagesavealpha($this->image, $alpha);
                 imagegif($this->image, $file);
@@ -451,7 +451,7 @@ class SimpleImage
                 imageavif($this->image, $file, $quality, $speed);
                 break;
             default:
-                throw new Exception('Unsupported format: ' . $mimeType, self::ERR_UNSUPPORTED_FORMAT);
+                throw new Exception('Unsupported format: '.$mimeType, self::ERR_UNSUPPORTED_FORMAT);
         }
 
         // Stop capturing
@@ -477,7 +477,7 @@ class SimpleImage
     {
         $image = $this->generate($mimeType, $options);
 
-        return 'data:' . $image['mimeType'] . ';base64,' . base64_encode($image['data']);
+        return 'data:'.$image['mimeType'].';base64,'.base64_encode($image['data']);
     }
 
     /**
@@ -497,7 +497,7 @@ class SimpleImage
         // Set download headers
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Content-Description: File Transfer');
-        header('Content-Length: ' . strlen($image['data']));
+        header('Content-Length: '.strlen($image['data']));
         header('Content-Transfer-Encoding: Binary');
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename=\"$filename\"");
@@ -543,7 +543,7 @@ class SimpleImage
         $image = $this->generate($mimeType, $options);
 
         // Output the image to stdout
-        header('Content-Type: ' . $image['mimeType']);
+        header('Content-Type: '.$image['mimeType']);
         echo $image['data'];
 
         return $this;
@@ -706,7 +706,7 @@ class SimpleImage
             return $this;
         }
 
-        switch ($exif['Orientation']) {
+        switch($exif['Orientation']) {
             case 1: // Do nothing!
                 break;
             case 2: // Flip horizontally
@@ -958,10 +958,8 @@ class SimpleImage
         self::imageCopyMergeAlpha(
             $this->image,
             $overlay->image,
-            $x,
-            $y,
-            0,
-            0,
+            $x, $y,
+            0, 0,
             $overlay->getWidth(),
             $overlay->getHeight(),
             $opacity
@@ -1009,10 +1007,7 @@ class SimpleImage
         imagecopyresampled(
             $newImage,
             $this->image,
-            0,
-            0,
-            0,
-            0,
+            0, 0, 0, 0,
             $width,
             $height,
             $this->getWidth(),
@@ -1059,7 +1054,7 @@ class SimpleImage
 
         $this->image = imagerotate(
             $this->image,
-            - (self::keepWithin($angle, -360, 360)),
+            -(self::keepWithin($angle, -360, 360)),
             $backgroundColor
         );
         imagecolortransparent($this->image, imagecolorallocatealpha($this->image, 0, 0, 0, 127));
@@ -1127,17 +1122,17 @@ class SimpleImage
         $angle = 0;
 
         // Calculate the bounding box dimensions
-        //
+    //
         // Since imagettfbox() returns a bounding box from the text's baseline, we can end up with
         // different heights for different strings of the same font size. For example, 'type' will often
         // be taller than 'text' because the former has a descending letter.
-        //
+    //
         // To compensate for this, we created a temporary bounding box to measure the maximum height
         // that the font used can occupy. Based on this, we can adjust the text vertically so that it
         // appears inside the box with a good consistency.
-        //
+    //
         // See: https://github.com/claviska/SimpleImage/issues/165
-        //
+    //
 
         $boxText = imagettfbbox($size, $angle, $fontFile, $text);
         if (! $boxText) {
@@ -1183,7 +1178,7 @@ class SimpleImage
         $xOffset -= $boxText[0];
 
         // Determine position
-        switch ($anchor) {
+        switch($anchor) {
             case 'top left':
                 $x = $xOffset;
                 $y = $yOffset + $boxHeight;
@@ -1341,7 +1336,7 @@ class SimpleImage
                 $imageText->text($line, ['fontFile' => $fontFile, 'size' => $fontSizePx, 'color' => $color, 'anchor' => $align, 'xOffset' => 0, 'yOffset' => $key * ($fontSizePx * 1.2 + $leading), 'shadow' => $shadow, 'calculateOffsetFromEdge' => true]);
             }
 
-            // Justify
+        // Justify
         } else {
             foreach ($lines as $keyLine => $line) {
                 // Check if there are spaces at the beginning of the sentence
@@ -1355,7 +1350,7 @@ class SimpleImage
                 // Separate words
                 $words = preg_split("/\s+/", $line);
                 // Include spaces with the first word
-                $words[0] = str_repeat(' ', $spaces) . $words[0];
+                $words[0] = str_repeat(' ', $spaces).$words[0];
 
                 // Calculates the space occupied by all words
                 $wordsSize = [];
@@ -1382,9 +1377,7 @@ class SimpleImage
                         }
                         $word = $line;
                     }
-                    $imageText->text(
-                        $word,
-                        ['fontFile' => $fontFile, 'size' => $fontSizePx, 'color' => $color, 'anchor' => 'top left', 'xOffset' => $xOffsetJustify, 'yOffset' => $keyLine * ($fontSizePx * 1.2 + $leading), 'shadow' => $shadow, 'calculateOffsetFromEdge' => true]
+                    $imageText->text($word, ['fontFile' => $fontFile, 'size' => $fontSizePx, 'color' => $color, 'anchor' => 'top left', 'xOffset' => $xOffsetJustify, 'yOffset' => $keyLine * ($fontSizePx * 1.2 + $leading), 'shadow' => $shadow, 'calculateOffsetFromEdge' => true]
                     );
                     // Calculate offset for next word
                     $xOffsetJustify += $wordsSize[$key] + $wordSpacing;
@@ -1418,12 +1411,12 @@ class SimpleImage
 
                 continue;
             }
-            $lineBox = imagettfbbox($fontSize, 0, $fontFile, $lines[$lineKey] . $word);
+            $lineBox = imagettfbbox($fontSize, 0, $fontFile, $lines[$lineKey].$word);
             if (abs($lineBox[4] - $lineBox[0]) < $maxWidth) {
-                $lines[$lineKey] .= $word . ' ';
+                $lines[$lineKey] .= $word.' ';
             } else {
                 $lineKey++;
-                $lines[$lineKey] = $word . ' ';
+                $lines[$lineKey] = $word.' ';
             }
         }
         $isLastLine[$lineKey] = true;
@@ -1477,7 +1470,7 @@ class SimpleImage
             $this->resize($width);
         }
 
-        switch ($anchor) {
+        switch($anchor) {
             case 'top':
                 $x1 = floor(($this->getWidth() / 2) - ($width / 2));
                 $x2 = $width + $x1;
@@ -2039,10 +2032,8 @@ class SimpleImage
         self::imageCopyMergeAlpha(
             $newImage->image,
             $this->image,
-            0,
-            0,
-            0,
-            0,
+            0, 0,
+            0, 0,
             $this->getWidth(),
             $this->getHeight(),
             (int) round(self::keepWithin($opacity, 0, 1) * 100)
@@ -2208,7 +2199,7 @@ class SimpleImage
     public function extractColors(int $count = 5, string|array $backgroundColor = null): array
     {
         // Check for required library
-        if (! class_exists('\\' . ColorExtractor::class)) {
+        if (! class_exists('\\'.ColorExtractor::class)) {
             throw new Exception(
                 'Required library \League\ColorExtractor is missing.',
                 self::ERR_LIB_NOT_LOADED
@@ -2290,154 +2281,53 @@ class SimpleImage
     {
         // 140 CSS color names and hex values
         $cssColors = [
-            'aliceblue' => '#f0f8ff',
-            'antiquewhite' => '#faebd7',
-            'aqua' => '#00ffff',
-            'aquamarine' => '#7fffd4',
-            'azure' => '#f0ffff',
-            'beige' => '#f5f5dc',
-            'bisque' => '#ffe4c4',
-            'black' => '#000000',
-            'blanchedalmond' => '#ffebcd',
-            'blue' => '#0000ff',
-            'blueviolet' => '#8a2be2',
-            'brown' => '#a52a2a',
-            'burlywood' => '#deb887',
-            'cadetblue' => '#5f9ea0',
-            'chartreuse' => '#7fff00',
-            'chocolate' => '#d2691e',
-            'coral' => '#ff7f50',
-            'cornflowerblue' => '#6495ed',
-            'cornsilk' => '#fff8dc',
-            'crimson' => '#dc143c',
-            'cyan' => '#00ffff',
-            'darkblue' => '#00008b',
-            'darkcyan' => '#008b8b',
-            'darkgoldenrod' => '#b8860b',
-            'darkgray' => '#a9a9a9',
-            'darkgrey' => '#a9a9a9',
-            'darkgreen' => '#006400',
-            'darkkhaki' => '#bdb76b',
-            'darkmagenta' => '#8b008b',
-            'darkolivegreen' => '#556b2f',
-            'darkorange' => '#ff8c00',
-            'darkorchid' => '#9932cc',
-            'darkred' => '#8b0000',
-            'darksalmon' => '#e9967a',
-            'darkseagreen' => '#8fbc8f',
-            'darkslateblue' => '#483d8b',
-            'darkslategray' => '#2f4f4f',
-            'darkslategrey' => '#2f4f4f',
-            'darkturquoise' => '#00ced1',
-            'darkviolet' => '#9400d3',
-            'deeppink' => '#ff1493',
-            'deepskyblue' => '#00bfff',
-            'dimgray' => '#696969',
-            'dimgrey' => '#696969',
-            'dodgerblue' => '#1e90ff',
-            'firebrick' => '#b22222',
-            'floralwhite' => '#fffaf0',
-            'forestgreen' => '#228b22',
-            'fuchsia' => '#ff00ff',
-            'gainsboro' => '#dcdcdc',
-            'ghostwhite' => '#f8f8ff',
-            'gold' => '#ffd700',
-            'goldenrod' => '#daa520',
-            'gray' => '#808080',
-            'grey' => '#808080',
-            'green' => '#008000',
-            'greenyellow' => '#adff2f',
-            'honeydew' => '#f0fff0',
-            'hotpink' => '#ff69b4',
-            'indianred ' => '#cd5c5c',
-            'indigo ' => '#4b0082',
-            'ivory' => '#fffff0',
-            'khaki' => '#f0e68c',
-            'lavender' => '#e6e6fa',
-            'lavenderblush' => '#fff0f5',
-            'lawngreen' => '#7cfc00',
-            'lemonchiffon' => '#fffacd',
-            'lightblue' => '#add8e6',
-            'lightcoral' => '#f08080',
-            'lightcyan' => '#e0ffff',
-            'lightgoldenrodyellow' => '#fafad2',
-            'lightgray' => '#d3d3d3',
-            'lightgrey' => '#d3d3d3',
-            'lightgreen' => '#90ee90',
-            'lightpink' => '#ffb6c1',
-            'lightsalmon' => '#ffa07a',
-            'lightseagreen' => '#20b2aa',
-            'lightskyblue' => '#87cefa',
-            'lightslategray' => '#778899',
-            'lightslategrey' => '#778899',
-            'lightsteelblue' => '#b0c4de',
-            'lightyellow' => '#ffffe0',
-            'lime' => '#00ff00',
-            'limegreen' => '#32cd32',
-            'linen' => '#faf0e6',
-            'magenta' => '#ff00ff',
-            'maroon' => '#800000',
-            'mediumaquamarine' => '#66cdaa',
-            'mediumblue' => '#0000cd',
-            'mediumorchid' => '#ba55d3',
-            'mediumpurple' => '#9370db',
-            'mediumseagreen' => '#3cb371',
-            'mediumslateblue' => '#7b68ee',
-            'mediumspringgreen' => '#00fa9a',
-            'mediumturquoise' => '#48d1cc',
-            'mediumvioletred' => '#c71585',
-            'midnightblue' => '#191970',
-            'mintcream' => '#f5fffa',
-            'mistyrose' => '#ffe4e1',
-            'moccasin' => '#ffe4b5',
-            'navajowhite' => '#ffdead',
-            'navy' => '#000080',
-            'oldlace' => '#fdf5e6',
-            'olive' => '#808000',
-            'olivedrab' => '#6b8e23',
-            'orange' => '#ffa500',
-            'orangered' => '#ff4500',
-            'orchid' => '#da70d6',
-            'palegoldenrod' => '#eee8aa',
-            'palegreen' => '#98fb98',
-            'paleturquoise' => '#afeeee',
-            'palevioletred' => '#db7093',
-            'papayawhip' => '#ffefd5',
-            'peachpuff' => '#ffdab9',
-            'peru' => '#cd853f',
-            'pink' => '#ffc0cb',
-            'plum' => '#dda0dd',
-            'powderblue' => '#b0e0e6',
-            'purple' => '#800080',
-            'rebeccapurple' => '#663399',
-            'red' => '#ff0000',
-            'rosybrown' => '#bc8f8f',
-            'royalblue' => '#4169e1',
-            'saddlebrown' => '#8b4513',
-            'salmon' => '#fa8072',
-            'sandybrown' => '#f4a460',
-            'seagreen' => '#2e8b57',
-            'seashell' => '#fff5ee',
-            'sienna' => '#a0522d',
-            'silver' => '#c0c0c0',
-            'skyblue' => '#87ceeb',
-            'slateblue' => '#6a5acd',
-            'slategray' => '#708090',
-            'slategrey' => '#708090',
-            'snow' => '#fffafa',
-            'springgreen' => '#00ff7f',
-            'steelblue' => '#4682b4',
-            'tan' => '#d2b48c',
-            'teal' => '#008080',
-            'thistle' => '#d8bfd8',
-            'tomato' => '#ff6347',
-            'turquoise' => '#40e0d0',
-            'violet' => '#ee82ee',
-            'wheat' => '#f5deb3',
-            'white' => '#ffffff',
-            'whitesmoke' => '#f5f5f5',
-            'yellow' => '#ffff00',
-            'yellowgreen' => '#9acd32',
+            'aliceblue' => '#f0f8ff', 'antiquewhite' => '#faebd7', 'aqua' => '#00ffff',
+            'aquamarine' => '#7fffd4', 'azure' => '#f0ffff', 'beige' => '#f5f5dc', 'bisque' => '#ffe4c4',
+            'black' => '#000000', 'blanchedalmond' => '#ffebcd', 'blue' => '#0000ff',
+            'blueviolet' => '#8a2be2', 'brown' => '#a52a2a', 'burlywood' => '#deb887',
+            'cadetblue' => '#5f9ea0', 'chartreuse' => '#7fff00', 'chocolate' => '#d2691e',
+            'coral' => '#ff7f50', 'cornflowerblue' => '#6495ed', 'cornsilk' => '#fff8dc',
+            'crimson' => '#dc143c', 'cyan' => '#00ffff', 'darkblue' => '#00008b', 'darkcyan' => '#008b8b',
+            'darkgoldenrod' => '#b8860b', 'darkgray' => '#a9a9a9', 'darkgrey' => '#a9a9a9',
+            'darkgreen' => '#006400', 'darkkhaki' => '#bdb76b', 'darkmagenta' => '#8b008b',
+            'darkolivegreen' => '#556b2f', 'darkorange' => '#ff8c00', 'darkorchid' => '#9932cc',
+            'darkred' => '#8b0000', 'darksalmon' => '#e9967a', 'darkseagreen' => '#8fbc8f',
+            'darkslateblue' => '#483d8b', 'darkslategray' => '#2f4f4f', 'darkslategrey' => '#2f4f4f',
+            'darkturquoise' => '#00ced1', 'darkviolet' => '#9400d3', 'deeppink' => '#ff1493',
+            'deepskyblue' => '#00bfff', 'dimgray' => '#696969', 'dimgrey' => '#696969',
+            'dodgerblue' => '#1e90ff', 'firebrick' => '#b22222', 'floralwhite' => '#fffaf0',
+            'forestgreen' => '#228b22', 'fuchsia' => '#ff00ff', 'gainsboro' => '#dcdcdc',
+            'ghostwhite' => '#f8f8ff', 'gold' => '#ffd700', 'goldenrod' => '#daa520', 'gray' => '#808080',
+            'grey' => '#808080', 'green' => '#008000', 'greenyellow' => '#adff2f',
+            'honeydew' => '#f0fff0', 'hotpink' => '#ff69b4', 'indianred ' => '#cd5c5c',
+            'indigo ' => '#4b0082', 'ivory' => '#fffff0', 'khaki' => '#f0e68c', 'lavender' => '#e6e6fa',
+            'lavenderblush' => '#fff0f5', 'lawngreen' => '#7cfc00', 'lemonchiffon' => '#fffacd',
+            'lightblue' => '#add8e6', 'lightcoral' => '#f08080', 'lightcyan' => '#e0ffff',
+            'lightgoldenrodyellow' => '#fafad2', 'lightgray' => '#d3d3d3', 'lightgrey' => '#d3d3d3',
+            'lightgreen' => '#90ee90', 'lightpink' => '#ffb6c1', 'lightsalmon' => '#ffa07a',
+            'lightseagreen' => '#20b2aa', 'lightskyblue' => '#87cefa', 'lightslategray' => '#778899',
+            'lightslategrey' => '#778899', 'lightsteelblue' => '#b0c4de', 'lightyellow' => '#ffffe0',
+            'lime' => '#00ff00', 'limegreen' => '#32cd32', 'linen' => '#faf0e6', 'magenta' => '#ff00ff',
+            'maroon' => '#800000', 'mediumaquamarine' => '#66cdaa', 'mediumblue' => '#0000cd',
+            'mediumorchid' => '#ba55d3', 'mediumpurple' => '#9370db', 'mediumseagreen' => '#3cb371',
+            'mediumslateblue' => '#7b68ee', 'mediumspringgreen' => '#00fa9a',
+            'mediumturquoise' => '#48d1cc', 'mediumvioletred' => '#c71585', 'midnightblue' => '#191970',
+            'mintcream' => '#f5fffa', 'mistyrose' => '#ffe4e1', 'moccasin' => '#ffe4b5',
+            'navajowhite' => '#ffdead', 'navy' => '#000080', 'oldlace' => '#fdf5e6', 'olive' => '#808000',
+            'olivedrab' => '#6b8e23', 'orange' => '#ffa500', 'orangered' => '#ff4500',
+            'orchid' => '#da70d6', 'palegoldenrod' => '#eee8aa', 'palegreen' => '#98fb98',
+            'paleturquoise' => '#afeeee', 'palevioletred' => '#db7093', 'papayawhip' => '#ffefd5',
+            'peachpuff' => '#ffdab9', 'peru' => '#cd853f', 'pink' => '#ffc0cb', 'plum' => '#dda0dd',
+            'powderblue' => '#b0e0e6', 'purple' => '#800080', 'rebeccapurple' => '#663399',
+            'red' => '#ff0000', 'rosybrown' => '#bc8f8f', 'royalblue' => '#4169e1',
+            'saddlebrown' => '#8b4513', 'salmon' => '#fa8072', 'sandybrown' => '#f4a460',
+            'seagreen' => '#2e8b57', 'seashell' => '#fff5ee', 'sienna' => '#a0522d',
+            'silver' => '#c0c0c0', 'skyblue' => '#87ceeb', 'slateblue' => '#6a5acd',
+            'slategray' => '#708090', 'slategrey' => '#708090', 'snow' => '#fffafa',
+            'springgreen' => '#00ff7f', 'steelblue' => '#4682b4', 'tan' => '#d2b48c', 'teal' => '#008080',
+            'thistle' => '#d8bfd8', 'tomato' => '#ff6347', 'turquoise' => '#40e0d0',
+            'violet' => '#ee82ee', 'wheat' => '#f5deb3', 'white' => '#ffffff', 'whitesmoke' => '#f5f5f5',
+            'yellow' => '#ffff00', 'yellowgreen' => '#9acd32',
         ];
 
         // Parse alpha from '#fff|.5' and 'white|.5'
@@ -2467,21 +2357,21 @@ class SimpleImage
             // Support short and standard hex codes
             if (strlen($hex) === 3 || strlen($hex) === 4) {
                 [$red, $green, $blue] = [
-                    $hex[0] . $hex[0],
-                    $hex[1] . $hex[1],
-                    $hex[2] . $hex[2],
+                    $hex[0].$hex[0],
+                    $hex[1].$hex[1],
+                    $hex[2].$hex[2],
                 ];
                 if (strlen($hex) === 4) {
                     $alpha = hexdec($hex[3]) / 255;
                 }
             } elseif (strlen($hex) === 6 || strlen($hex) === 8) {
                 [$red, $green, $blue] = [
-                    $hex[0] . $hex[1],
-                    $hex[2] . $hex[3],
-                    $hex[4] . $hex[5],
+                    $hex[0].$hex[1],
+                    $hex[2].$hex[3],
+                    $hex[4].$hex[5],
                 ];
                 if (strlen($hex) === 8) {
-                    $alpha = hexdec($hex[6] . $hex[7]) / 255;
+                    $alpha = hexdec($hex[6].$hex[7]) / 255;
                 }
             } else {
                 throw new Exception("Invalid color value: $color", self::ERR_INVALID_COLOR);

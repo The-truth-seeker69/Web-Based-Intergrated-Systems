@@ -1,6 +1,7 @@
-<?php include "../header.php";
-require '../../base.php';
+<?php
 session_start();
+include "../header.php";
+
 
 
 $fields = [
@@ -142,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
-
+        <img src="" alt="">
 
     </form>
     </section>

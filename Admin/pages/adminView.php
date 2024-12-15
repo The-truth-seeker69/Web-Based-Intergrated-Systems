@@ -1,5 +1,6 @@
-<?php include "../header.php";
-require '../../base.php';
+<?php
+session_start();
+include "../header.php";
 
 
 $fields = [
@@ -51,7 +52,9 @@ $arr = $p->result;
 
 <main>
     <form id="search-filter">
+        <?php
 
+        ?>
         <label>Search :</label>
         <?= html_search('keyword', 'placeholder="Search...."', 'id=""') ?>
 
@@ -59,7 +62,7 @@ $arr = $p->result;
 
 
         <button id="search-button">Search &#128269;</button>
-        <?= html_button("addAdmin.php", "Add New Admin  &#10010;", "id='add-admin-btn'") ?>
+        <?= html_button("adminRegister.php", "Add New Admin  &#10010;", "id='add-admin-btn'") ?>
     </form>
     <form method="POST" id="member-table">
         <table>
@@ -79,7 +82,10 @@ $arr = $p->result;
                         <td><?= $a->adminName ?></td>
                         <td><?= $a->adminEmail ?></td>
                         <td><?= $a->adminPhoneNo ?></td>
-                        <td><?= $a->adminPic ?></td>
+                        <td>
+                            <img src="/image/admin/uploads/<?= $a->adminPic ?>" alt="Profile Picture">
+
+                        </td>
                         <td><?= $a->adminRole ?></td>
 
 

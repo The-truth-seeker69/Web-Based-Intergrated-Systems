@@ -1,4 +1,5 @@
 <?php
+
 function req($key, $value = null)
 {
     $value = $_REQUEST[$key] ?? $value;
@@ -170,4 +171,51 @@ function html_text($key, $attr = '')
 {
     $value = encode($GLOBALS[$key] ?? '');
     echo "<input type='text' id='$key' name='$key' value='$value' $attr>";
+}
+
+//authenicate user 
+$_user = $_SESSION['user'] ?? null;
+function auth(...$roles)
+{
+
+
+    global $_user;
+    if ($_user) {
+        if ($roles) {
+            if (in_array($_user->role, $roles)) {
+                return; // OK
+            }
+        } else {
+            return; // OK
+        }
+    }
+}
+
+
+function is_get()
+{
+    return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
+
+
+
+function login($user, $url = '/')
+{
+    $_SESSION['user'] = $user;
+    var_dump($user);
+    redirect($url);
+}
+
+
+function logout($url = '/')
+{
+    unset($_SESSION['user']);
+    redirect($url);
+}
+
+//validate email
+function is_email($value)
+{
+    return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
 }

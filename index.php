@@ -1,4 +1,6 @@
-<?php include "./User/header.php" ?>
+<?php include "./User/header.php";
+
+?>
 
 
 <div class="slideshow-container" id="hero-display">

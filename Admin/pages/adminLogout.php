@@ -11,4 +11,4 @@ if (isset($_COOKIE['remember_token_admin'])) {
     setcookie('remember_token_admin', '', time() - 3600, '/', '', true, true); // Expire the cookie
 }
 
-redirect('/User/loginPortal.html');
+redirect('adminLogin.php');
