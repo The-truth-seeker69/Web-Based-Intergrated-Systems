@@ -15,9 +15,16 @@ include "header.php";
 
 <?php
 $search = req("searchInput");
+$category = req("category");
 if ($search) {
     $stm = $_db->prepare('SELECT * FROM product WHERE prodName LIKE ?');
     $stm->execute(["%$search%"]);
+    if ($stm->rowCount() == 0) {
+        temp("info", "No Such Item Found.");
+    }
+}else if($category){
+    $stm = $_db->prepare('SELECT * FROM product WHERE categoryID = (SELECT categoryID FROM category WHERE categoryName = ?)');
+    $stm->execute(["$category"]);
     if ($stm->rowCount() == 0) {
         temp("info", "No Such Item Found.");
     }
@@ -40,15 +47,20 @@ $arr = $stm->fetchAll();
             </div>
         </form>
         <div class="filter-bar">
-            <select id="filterSelect">
+            <select id="filterSelect" onchange="filterCategory()">
                 <option value="all">All</option>
                 <?php
                     $stm_cat = $_db->prepare('SELECT * FROM category');
                     $stm_cat->execute();
                     $arr_cat = $stm_cat->fetchAll();
 
+                    $decodedCategory = urldecode($category);
                     foreach($arr_cat as $cat){
-                        echo "<option value=\"$cat->categoryName\">$cat->categoryName</option>";
+                        if ($decodedCategory && $decodedCategory == $cat->categoryName) {
+                            echo "<option value=\"$cat->categoryName\" selected>$cat->categoryName</option>";
+                        } else {
+                            echo "<option value=\"$cat->categoryName\">$cat->categoryName</option>";
+                        }
                     }
                 ?>
             </select>
@@ -70,7 +82,7 @@ $arr = $stm->fetchAll();
                 <button class="arrow left" onclick="prevImage(this)">&#8249;</button>
                 <div class="image-container">
                     <?php foreach ($arr2 as $index => $image): ?>
-                    <img src="../../image/<?= htmlspecialchars($image->imageURL) ?>"
+                    <img src="../../image/user/uploads/<?= htmlspecialchars($image->imageURL) ?>"
                         alt="<?= htmlspecialchars($image->imageAltText) ?>" class="<?= $index === 0 ? 'active' : '' ?>"
                         style="width:300px; height:180px;">
                     <?php endforeach; ?>
@@ -81,7 +93,8 @@ $arr = $stm->fetchAll();
             <h3><?= $p->prodName ?></h3>
             <p><b>RM<?= $p->prodPrice ?></b></p>
             <p>Stock Available: <?= $p->prodStock ?></p>
-            <button class="details-btn" data-get="productDetail.php?prodID=<?= $p->prodID ?>">Detail</button>
+            <button class="details-btn"
+                onclick="window.location.href='productDetails.php?prodID=<?= $p->prodID ?>'">Detail</button>
             <button class="cart-btn">Add to Cart</button>
         </div>
         <?php endforeach; ?>
@@ -126,6 +139,15 @@ function nextImage(button) {
     } else {
         images[activeIndex].classList.remove('active');
         images[0].classList.add('active');
+    }
+}
+
+function filterCategory() {
+    const filterSelect = document.getElementById("filterSelect").value;
+    if (filterSelect === "all") {
+        window.location.href = "products.php";
+    } else {
+        window.location.href = "products.php?category=" + encodeURIComponent(filterSelect);
     }
 }
 </script>

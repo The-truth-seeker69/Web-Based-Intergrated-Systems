@@ -1,34 +1,9 @@
-<?php include "./User/header.php";
+<?php include "./User/page/header.php";
 
 ?>
 
 <head>
 </head>
-
-<div class="slideshow-container" id="hero-display">
-    <div class="slides">
-        <img src="./image/user/display/img1.jpg" alt="Image 1">
-
-    </div>
-    <div class="slides">
-        <img src="./image/user/display/img2.jpg" alt="Image 2">
-
-    </div>
-    <div class="slides">
-        <img src="./image/user/display/img3.jpg" alt="Image 3">
-
-    </div>
-    <div class="slides">
-        <img src="./image/user/display/img4.jpg" alt="Image 3">
-
-    </div>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
-</div>
-
-<div id="banner">
-    <h3>A room without books is like a body without a soul.</h3>
-</div>
 <div id="imagetext-display-1">
     <div id="imagetext-image">
         <img src="./image/user/display/img1.jpg" alt="Image 3">
