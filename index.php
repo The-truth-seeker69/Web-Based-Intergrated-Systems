@@ -1,4 +1,6 @@
-<?php include "./User/header.php";
+<?php
+require '_base.php';
+include "./User/header.php";
 
 ?>
 

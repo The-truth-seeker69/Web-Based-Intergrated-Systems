@@ -1,6 +1,10 @@
 <?php
 
 require __DIR__ . '/../base.php';
+
+
+
+
 ?>
 
 
@@ -16,6 +20,7 @@ require __DIR__ . '/../base.php';
     <link rel="stylesheet" href="/Style/general/genaral.css">
     <link rel="stylesheet" href="/Style/admin/memberView.css">
     <link rel="stylesheet" href="/Style/admin/viewAdminProfile.css">
+    <link rel="stylesheet" href="/Style/admin/updateAdmin.css">
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,29 +32,44 @@ require __DIR__ . '/../base.php';
 <body>
 
     <header>
-
         <div id="header-brand">
             <h1><a href="/Admin/home.php">Unpopular </a></h1>
         </div>
 
-        <ul class="nav-links">
-            <li><a href="/Admin/home.php">Home</a></li>
-            <li><a href="/Admin/pages/memberView.php">Member</a></li>
-            <li><a href="/Admin/pages/adminView.php">Admin</a></li>
+        <?php if ($_user && $_user->adminRole == 'Manager'): ?>
+            <ul class="nav-links">
+                <li><a href="/Admin/home.php">Home</a></li>
+                <li><a href="/Admin/pages/memberView.php">Member</a></li>
+                <li><a href="/Admin/pages/adminView.php">Admin</a></li>
+                <li><a href="">Product</a></li>
+                <li><a href="#">Order</a></li>
+            </ul>
+        <?php elseif ($_user && $_user->adminRole == 'Admin'): ?>
+            <ul class="nav-links">
+                <li><a href="/Admin/home.php">Home</a></li>
+                <li><a href="/Admin/pages/memberView.php">Member</a></li>
+                <li><a href="">Product</a></li>
+                <li><a href="#">Order</a></li>
+            </ul>
+        <?php endif ?>
 
-            <li><a href="">Product</a></li>
-            <li><a href="#">Order</a></li>
 
+        <?php if (!$_user): ?>
+            <div id="profile-pic">
+                <img src="/image/admin/uploads/ppplaceholder.png" alt="Profile Picture">
+                <ul class="dropdown-menu">
+                    <li><a href="/Admin/pages/adminLogin.php">Login</a></li>
 
-        </ul>
-        <?php if ($_user): ?>
+                </ul>
+            </div>
+        <?php else: ?>
             <div id="profile-pic">
                 <img src="/image/admin/uploads/<?= $_user->adminPic ?>" alt=" Profile Picture">
                 <ul class="dropdown-menu">
                     <li><a href="/Admin/pages/viewAdminProfile.php">View Profile</a></li>
-                    <li><a href="/Admin/pages/editAdminProfile.php">Edit Profile</a></li>
                     <li><a href="/Admin/pages/adminLogout.php">Logout</a></li>
                 </ul>
+
             </div>
         <?php endif ?>
 

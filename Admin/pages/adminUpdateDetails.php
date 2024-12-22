@@ -7,7 +7,7 @@ include "../header.php";
 
 
 // Check what session variables are set
-auth();
+
 
 
 if (is_get()) {
@@ -43,8 +43,8 @@ if (is_post()) {
     } else {
         // TODO
         $stm = $_db->prepare('
-                SELECT COUNT(*) FROM user
-                WHERE email = ? AND id != ?
+                SELECT COUNT(*) FROM admin
+                WHERE adminEmail = ? AND adminID != ?
             ');
         $stm->execute([$email, $_user->id]);
 
@@ -76,7 +76,7 @@ if (is_post()) {
         $stm = $_db->prepare('
         UPDATE admin
         SET adminemail = ?, adminname = ?, adminpic = ?
-        WHERE id = ?
+        WHERE adminid = ?
     ');
         $stm->execute([$email, $name, $photo, $_user->id]);
 
@@ -85,37 +85,43 @@ if (is_post()) {
         $_user->photo = $photo;
 
         temp('info', 'Record updated');
-        redirect('/');
+        redirect('/home.php');
     }
 }
 ?>
 
 <body>
+    <div id="update-admin-container">
+        <h1>Update Admin Details</h1>
 
-    <form id="admin-profile-form" method="post">
-        <input type="hidden" name="adminID" value="<?= htmlspecialchars($admin->adminID) ?>">
+        <form id="admin-profile-form" method="post">
+            <input type="hidden" name="adminID" value="<?= htmlspecialchars($admin->adminID) ?>">
+            <div class="form-group" id="profile-pic-container">
 
-        <label for="photo">Photo</label>
-        <label class="upload" tabindex="0">
-            <?= html_file('photo', 'image/*', 'hidden') ?>
-            <img src="/photos/<?= $photo ?>">
-        </label>
+                <label for="photo">Photo</label>
+                <label class="upload" tabindex="0">
+                    <?= html_file('photo', 'image/*', 'hidden') ?>
+                    <img src="/photos/<?= $photo ?>">
+                </label>
+            </div>
 
-        <label for="adminName">Name:</label>
-        <?= html_text('name', "required", 'maxlength="100"') ?>
-        <?= err('email') ?>
+            <label for="adminName">Name:</label>
+            <?= html_text('name', "required", 'maxlength="100"') ?>
+            <?= err('email') ?>
 
-        <label for="adminEmail">Email:</label>
-        <?= html_text('email', "required", 'maxlength="100"') ?>
-        <?= err('name') ?>
-        <label for="adminPhoneNo">Phone Number:</label>
-        <?= html_text('phoneNo', "required", 'maxlength="100"') ?>
-        <?= err('photo') ?>
+            <label for="adminEmail">Email:</label>
+            <?= html_text('email', "required", 'maxlength="100"') ?>
+            <?= err('name') ?>
+            <label for="adminPhoneNo">Phone Number:</label>
+            <?= html_text('phoneNo', "required", 'maxlength="100"') ?>
+            <?= err('photo') ?>
 
 
-        <button type="submit">Update</button>
-        <a href="viewAdminProfile.php" class="cancel-btn">Cancel</a>
+            <button type="submit">Update</button>
+            <a href="viewAdminProfile.php" class="cancel-btn">Cancel</a>
 
+        </form>
+    </div>
 
 </body>
 

@@ -11,8 +11,8 @@
 
 <body>
     <?php
-    session_start();
-    require '../../base.php';
+
+    require '../../_base.php';
     $name = req('name');
     $pass = req('pass');
 
@@ -27,7 +27,7 @@
         if ($admin) {
             $_SESSION['adminId'] = $admin->adminID;
             $_SESSION['adminName'] = $admin->adminName;
-            redirect('../home.php');
+            redirect('./home.php');
         }
     }
 
@@ -61,8 +61,7 @@
                 $stm->execute([$name]);
                 $admin = $stm->fetch();
                 temp('info', 'Login successfully');
-                login($admin);
-
+                login($admin, '../home.php');
                 if ($admin) {
                     $dbpass = $admin->adminPassword;
                     if (!password_verify($pass, $dbpass)) { //password incorrect
@@ -78,7 +77,6 @@
                             $stm->execute([$remember_token, $admin->adminID]);
                             setcookie('remember_token_admin', $remember_token, time() + (15 * 60), '/', '', true, true); //15minutes http only cookie
                         }
-                        redirect('../home.php');
                     }
                 }
             } else { //username dont exist

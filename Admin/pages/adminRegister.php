@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    require '../../base.php';
+    require '../../_base.php';
     if (is_post()) {
 
         $name = req('name');

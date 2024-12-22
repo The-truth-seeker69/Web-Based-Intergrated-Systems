@@ -203,7 +203,7 @@ function is_get()
 function login($user, $url = '/')
 {
     $_SESSION['user'] = $user;
-    var_dump($user);
+  
     redirect($url);
 }
 

@@ -1,5 +1,5 @@
 <?php
-require '../../base.php';
+require '../../_base.php';
 session_start();
 session_destroy(); // Destroy session
 
