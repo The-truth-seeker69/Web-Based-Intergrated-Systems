@@ -5,7 +5,7 @@ header {
     background-color: black;
     color: white;
     height: 10vh;
-    margin-bottom:3%;
+    font-family: 'Arial', serif;
 }
 
 header #header-brand {
@@ -19,6 +19,7 @@ header #header-brand {
     justify-content: center;
     align-items: center;
     gap: 60px;
+    margin-left: 300px;
     /* background-color: #f39c12; */
     width: 30%;
 }
@@ -51,6 +52,7 @@ header a {
     width: 15%;
     font-size: 16px;
     display: flex;
+    margin-left: 150px;
     justify-content: space-around;
     align-items: center;
 }
@@ -93,7 +95,8 @@ header a {
     border-bottom: 1px solid #928b8bd8;
     padding-bottom: 30px;
     margin-right: 20px;
-    gap: 10px; /* Added gap for better spacing */
+    gap: 10px;
+    /* Added gap for better spacing */
 }
 
 .cart-item input[type="checkbox"] {
@@ -101,7 +104,8 @@ header a {
 }
 
 .cart-item img {
-    width: 100px; /* Updated image size */
+    width: 100px;
+    /* Updated image size */
     height: 100px;
     margin-right: 10px;
 }
@@ -124,7 +128,8 @@ header a {
 }
 
 .qty-btn {
-    width: 20px; /* Reduced button size */
+    width: 20px;
+    /* Reduced button size */
     height: 20px;
     background-color: #007bff;
     color: #fff;
@@ -135,8 +140,10 @@ header a {
 }
 
 .item-quantity input {
-    width: 35px; /* Reduced width of quantity field */
-    height: 20px; /* Adjusted height */
+    width: 35px;
+    /* Reduced width of quantity field */
+    height: 20px;
+    /* Adjusted height */
     text-align: center;
     font-size: 14px;
 }
@@ -175,7 +182,7 @@ header a {
     margin-top: 10px;
 }
 
-.item-name{
+.item-name {
     color: black;
 }
 
@@ -201,10 +208,23 @@ header a {
 }
 
 @keyframes fade {
-      0% { top: -100px; opacity: 0; }
-     10% { top:  100px; opacity: 1; }
-     90% { top:  100px; opacity: 1; }
-    100% { top: -100px; opacity: 0; }
+    0% {
+        top: -100px;
+        opacity: 0;
+    }
+
+    10% {
+        top: 100px;
+        opacity: 1;
+    }
+
+    90% {
+        top: 100px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -100px;
+        opacity: 0;
+    }
 }
-
-
