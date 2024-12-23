@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include "../header.php";
 
 
@@ -118,7 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <td><?= $u->userName ?></td>
                         <td><?= $u->userEmail ?></td>
                         <td><?= $u->userPhoneNo ?></td>
-                        <td><?= $u->userPic ?></td>
+                        <td>
+                            <img src="/image/user/uploads/<?= $u->userPic ?>" alt="Profile Picture">
+                        </td>
                         <td><?= $u->userStatus ?></td>
                         <td>
                             <input type="checkbox" name="selectedUsers[]" value="<?= $u->userID ?>">

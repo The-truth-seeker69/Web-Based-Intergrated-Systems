@@ -1,38 +1,43 @@
 <?php
 // Start the session
-session_start();
 
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 // Include necessary files
 include "../header.php";
 
 
 // Check what session variables are set
 
+$adminID = $_GET['id'];
 
 
 if (is_get()) {
-    $adminID = $_GET['id'];
-
     // Fetch admin data
     $stm = $_db->prepare('SELECT * FROM Admin WHERE adminid = ?');
     $stm->execute([$adminID]);
     $admin = $stm->fetch();
+    if (!$admin) {
+        redirect('/');
+    }
     $_SESSION['photo'] = $admin->adminPic;
 
     extract((array)$admin);
-    print_r($admin);
     $name = $admin->adminName;
     $email = $admin->adminEmail;
     $phoneNo = $admin->adminPhoneNo;
+    $photo = $_SESSION['photo'];
 }
 if (is_post()) {
+
+
     $email = req('email');
     $name  = req('name');
+    $phoneNo  = req('phoneNo');
     $photo = $_SESSION['photo'];
-
-
-
     $f = get_file('photo');
+
+
     //validate name
     if ($email == '') {
         $_err['email'] = 'Required';
@@ -41,12 +46,12 @@ if (is_post()) {
     } else if (!is_email($email)) {
         $_err['email'] = 'Invalid email';
     } else {
-        // TODO
+
         $stm = $_db->prepare('
                 SELECT COUNT(*) FROM admin
                 WHERE adminEmail = ? AND adminID != ?
             ');
-        $stm->execute([$email, $_user->id]);
+        $stm->execute([$email, $adminID]);
 
         if ($stm->fetchColumn() > 0) {
             $_err['email'] = 'Duplicated';
@@ -66,26 +71,28 @@ if (is_post()) {
             $_err['photo'] = 'Maximum 1MB';
         }
     }
-
+    // db operation
     if (!$_err) {
         if ($f) {
-            unlink("../../image/admin/uploads");
+            unlink("../../image/admin/uploads/$photo");
             $photo = save_photo($f, '../../image/admin/uploads');
         }
 
         $stm = $_db->prepare('
         UPDATE admin
-        SET adminemail = ?, adminname = ?, adminpic = ?
+        SET adminemail = ?, adminname = ?, adminpic = ? , adminphoneno = ?
         WHERE adminid = ?
     ');
-        $stm->execute([$email, $name, $photo, $_user->id]);
+        $stm->execute([$email, $name, $photo, $phoneNo, $adminID]);
 
-        $_user->email = $email;
-        $_user->name = $name;
-        $_user->photo = $photo;
+        $_SESSION['photo'] = $photo;
+        $_user->adminEmail = $email;
+        $_user->adminName = $name;
+        $_user->adminPhoneNo = $phoneNo;
+        $_user->adminPic = $photo;
 
         temp('info', 'Record updated');
-        redirect('/home.php');
+        redirect("viewAdminProfile.php");
     }
 }
 ?>
@@ -94,19 +101,21 @@ if (is_post()) {
     <div id="update-admin-container">
         <h1>Update Admin Details</h1>
 
-        <form id="admin-profile-form" method="post">
-            <input type="hidden" name="adminID" value="<?= htmlspecialchars($admin->adminID) ?>">
+        <form id="admin-profile-form" method="post" enctype="multipart/form-data">
             <div class="form-group" id="profile-pic-container">
 
                 <label for="photo">Photo</label>
                 <label class="upload" tabindex="0">
                     <?= html_file('photo', 'image/*', 'hidden') ?>
-                    <img src="/photos/<?= $photo ?>">
+                    <img src='/image/admin/uploads/<?= $photo ?>' alt="Admin Photo">
                 </label>
             </div>
 
             <label for="adminName">Name:</label>
             <?= html_text('name', "required", 'maxlength="100"') ?>
+            <?php
+
+            ?>
             <?= err('email') ?>
 
             <label for="adminEmail">Email:</label>

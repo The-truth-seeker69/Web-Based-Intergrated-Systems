@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_user = $_SESSION['user'] ?? null;
+
 function is_post()
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -250,4 +251,35 @@ function html_checkbox($key, $label = '', $attr = '')
     $value = encode($GLOBALS[$key] ?? '');
     $status = $value == 1 ? 'checked' : '';
     echo "<label><input type='checkbox' id='$key' name='$key' value='1' $status $attr>$label</label>";
+}
+
+
+function is_get()
+{
+    return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
+
+
+function auth(...$roles)
+{
+
+
+    global $_user;
+    if ($_user) {
+        if ($roles) {
+            if (in_array($_user->role, $roles)) {
+                return; // OK
+            }
+        } else {
+            return; // OK
+        }
+    }
+}
+
+
+
+function html_button($href, $text, $attr = '')
+{
+    echo "<a href='$href' class='button' $attr>$text</a>";
 }

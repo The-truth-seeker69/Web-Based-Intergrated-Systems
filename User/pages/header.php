@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/Style/user/home.css">
     <link rel="stylesheet" href="/Style/user/header.css">
     <link rel="stylesheet" href="/Style/user/footer.css">
+    <link rel="stylesheet" href="/Style/user/aboutus.css">
+
     <script src="/script/cart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -30,7 +32,7 @@
             <li><a href="#">Products</a></li>
             <li><a href="#">Non-fiction</a></li>
             <li><a href="#">Kids's book</a></li>
-            <li><a href="#">放爽</a></li>
+            <li><a href="/User/pages/aboutus.php">About Us</a></li>
         </ul>
         <div id="header-utility">
             <a href="#login" class="nav-item">

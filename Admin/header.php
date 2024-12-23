@@ -1,7 +1,6 @@
 <?php
 
-require __DIR__ . '/../base.php';
-
+require __DIR__ . '/../_base.php';
 
 
 
@@ -24,8 +23,8 @@ require __DIR__ . '/../base.php';
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/script/app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="/script/app.js" defer></script>
 
 </head>
 
