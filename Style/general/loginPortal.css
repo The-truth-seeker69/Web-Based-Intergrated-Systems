@@ -1,5 +1,5 @@
 html{
-    background-image: url('../image/img1.jpg');
+    background-image: url('../../image/user/display/img1.jpg');
 }
 html::before {
     content: '';
