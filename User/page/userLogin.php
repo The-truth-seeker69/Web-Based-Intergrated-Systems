@@ -10,7 +10,7 @@
 <body>
     <?php 
     require '../../_base.php';
-
+    $captcha_key = 'user_login_captcha';
     if (isset($_COOKIE['remember_token'])) {
         $token = $_COOKIE['remember_token'];
     
@@ -51,7 +51,7 @@
 
         if (empty($captcha)) {
             $_err['captcha'] = 'CAPTCHA is required!';
-        } else if ($_SESSION['captcha'] !== $captcha) {
+        } else if ($_SESSION[$captcha_key] !== $captcha) {
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
@@ -61,7 +61,7 @@
                 $stm->execute([$name,$pass]);
                 $user=$stm->fetch();
 
-                if ($_SESSION['captcha'] !== $captcha) {
+                if ($_SESSION[$captcha_key] !== $captcha) {
                     $_err['captcha'] = 'CAPTCHA is incorrect!';
                 }
 
@@ -106,14 +106,14 @@
 
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php" alt="CAPTCHA" />
+            <img src="../../lib/captcha.php?form_type=user_login" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
             <div class="actions">
                 <label>
                     <?= html_checkbox('remember')?> Remember Me
                 </label>
-                <a href="#" class="forgot-password">Forgot Password?</a>
+                <a href="userReset.php" class="forgot-password">Forgot Password?</a>
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
