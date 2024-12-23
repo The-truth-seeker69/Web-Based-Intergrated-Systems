@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php @include "../../base.php" ?>
-<?php @include "base.php" ?>
+<?php @include "../../_base.php" ?>
+<?php @include "_base.php" ?>
 
 <head>
     <meta charset="UTF-8">

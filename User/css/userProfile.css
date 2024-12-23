@@ -9,16 +9,19 @@
 /* Body Styling */
 body {
     background-color: #d7f0ff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
 }
 
 /* Account Container */
 .account-container {
     background-color: #ffffff;
+    max-width: 90%;
     width: 400px;
+    margin: auto;
     padding: 30px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -111,8 +114,7 @@ button:hover {
     font-size: 16px;
 }
 
-/* Flash Message ----------------------------------------------------------- */
-
+/* Flash Message */
 #info {
     position: fixed;
     color: #fff;
@@ -122,11 +124,10 @@ button:hover {
     padding: 10px 20px;
     left: 50%;
     translate: -50% 0;
-    z-index: 999;
+    z-index: 9999;
     top: -100px;
     opacity: 0;
 }
-
 
 #info:not(:empty) {
     animation: fade 5s;

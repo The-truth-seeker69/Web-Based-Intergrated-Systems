@@ -1,0 +1,58 @@
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       margin-bottom: 20px;
+   }
+
+   th,
+   td {
+       padding: 15px;
+       border: 1px solid #ccc;
+   }
+
+   th {
+       background-color: #f4f4f4;
+       text-align: left;
+   }
+
+   .order-details {
+       display: flex;
+       flex-direction: column;
+   }
+
+   .item {
+       display: flex;
+       justify-content: space-between;
+       padding: 5px 0;
+   }
+
+   .item-name {
+       flex: 2;
+       font-weight: bold;
+   }
+
+   .item-qty {
+       flex: 1;
+       text-align: right;
+       color: #555;
+   }
+
+   .action-btn {
+       text-align: center;
+   }
+
+   .grand-total {
+       font-weight: bold;
+       color: #333;
+   }
+
+   .summary {
+       width: 50%;
+   }
+
+   .summary th,
+   .summary td {
+       padding: 15px;
+       border: 1px solid #ccc;
+       background-color: none;
+   }

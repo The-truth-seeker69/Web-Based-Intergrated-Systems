@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_user = $_SESSION['user'] ?? null;
+$_user = $_SESSION['user'] ?? null; 
 function is_post()
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -256,18 +256,18 @@ function table_headers($fields, $sort, $dir, $href = '')
 }
 
 
-function save_photo($f, $folder, $width = 200, $height = 200)
-{
-    $photo = uniqid() . '.jpg';
+// function save_photo($f, $folder, $width = 200, $height = 200)
+// {
+//     $photo = uniqid() . '.jpg';
 
-    require_once 'lib/SimpleImage.php';
-    $img = new SimpleImage();
-    $img->fromFile($f->tmp_name)
-        ->thumbnail($width, $height)
-        ->toFile("$folder/$photo", 'image/jpeg');
+//     require_once 'lib/SimpleImage.php';
+//     $img = new SimpleImage();
+//     $img->fromFile($f->tmp_name)
+//         ->thumbnail($width, $height)
+//         ->toFile("$folder/$photo", 'image/jpeg');
 
-    return $photo;
-}
+//     return $photo;
+// }
 
 
 function login($user, $url = '/')
@@ -284,17 +284,17 @@ function logout($url = '/')
     redirect($url);
 }
 
-function is_email($value)
-{
-    return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
-}
+// function is_email($value)
+// {
+//     return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
+// }
 
 
-function html_password($key, $attr = '')
-{
-    $value = encode($GLOBALS[$key] ?? '');
-    echo "<input type='password' id='$key' name='$key' value='$value' $attr>";
-}
+// function html_password($key, $attr = '')
+// {
+//     $value = encode($GLOBALS[$key] ?? '');
+//     echo "<input type='password' id='$key' name='$key' value='$value' $attr>";
+// }
 
 
 function html_checkbox($key, $label = '', $attr = '')

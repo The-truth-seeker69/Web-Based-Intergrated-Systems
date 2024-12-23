@@ -1,92 +1,84 @@
 <?php
-include '../../_base.php';
-
+require 'header.php';
+$_title = 'Order | History';
 // ----------------------------------------------------------------------------
 
-// (1) Authorization (member)
-// auth('Member');
 
-// (2) Return orders belong to the user (descending)
+//remove this
+$_SESSION['userId'] = 1;
+$userId = $_SESSION['userId'];
+
 $stm = $_db->prepare('
     SELECT * FROM `order`
     WHERE userID = ?
-    ORDER BY orderID DESC
 ');
- $stm->execute([$userId]);
+$stm->execute([$userId]);
 $arr = $stm->fetchAll();
 
-
-
-
-// ----------------------------------------------------------------------------
-
-$_title = 'Order | History';
-include '../header.php';
 ?>
 
-<!-- (B) EXTRA: CSS -->
-<!-- TODO -->
- <style>
-    tr:hover .popup  {
-        display: grid !important;
-        grid: auto / repeat(5, auto);
-        gap: 1px;
-        border: none;
-    } 
+<!DOCTYPE html>
+<html lang="en">
 
-    .popup img {
-        width: 50px;
-        height: 50px;
-        outline: 1px solid #333; /* border color*/
-    }
-</style>
-
-
-<p>
-    <button data-post="reset.php" data-confirm>Reset</button>
-</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="../css/orderHistory.css">
+    <script src="../../script/app.js"></script>
+    <script src="../JS/userProfile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
 <p><?= count($arr) ?> record(s)</p>
 
-<table class="table">
-    <tr>
-        <th>Id</th>
-        <th>Datetime</th>
-        <th>Count</th>
-        <th>Total (RM)</th>
-        <th></th>
-    </tr>
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Datetime</th>
+            <th>Grand Total (RM)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        foreach ($arr as $o) {
+            // Fetch order items
+            // $stm2 = $_db->prepare('SELECT * FROM `order_item` WHERE orderID = ?');
+            // $stm2->execute([$o->orderID]);
+            // $arr_items = $stm2->fetchAll();
 
-    <?php foreach ($arr as $o): ?>
-    <tr>
-        <td><?= $o->id ?></td>
-        <td><?= $o->datetime ?></td>
-        <td class="right"><?= $o->count ?></td>
-        <td class="right"><?= $o->total ?></td>
-        <td>
-            <button data-get="detail.php?id=<?= $o->id ?>">Detail</button>
-            <!-- (A) EXTRA: Product photos -->
-            <!-- TODO -->
-             <div class="popup">
-                <?php
-                    $stm = $_db->prepare('
-                        SELECT p.photo 
-                        FROM item AS i, product AS p
-                        WHERE i.product_id = p.id
-                        AND i.order_id = ?
-                    ');
-                    $stm->execute([$o->id]);
-                    $photos = $stm->fetchAll(PDO::FETCH_COLUMN);
-                    foreach ($photos as $photo) {
-                        echo "<img src='/products/$photo'>";
-                    }
-                ?>
-            </div>
+            // Fetch product details for each item
+            // $items_html = '';
+            // foreach ($arr_items as $items) {
+            //     $stm3 = $_db->prepare('SELECT * FROM `product` WHERE prodID = ?');
+            //     $stm3->execute([$items->prodID]);
+            //     $product = $stm3->fetch();
 
-        </td>
-    </tr>
-    <?php endforeach ?>
+            //     $items_html .= "<div class='item'>
+            //                         <div class='item-name'>{$product->prodName}</div>
+            //                         <div class='item-qty'>{$items->orderItemsQty} pcs</div>
+            //                     </div>";
+            // }
+        ?>
+        <tr>
+            <td><?= $o->orderID ?></td>
+            <td><?= $o->orderDate ?></td>
+            <td class="grand-total"><?= $o->grandTotal ?></td>
+            <!-- <td>
+                <div class="order-details">
+                    <?= $items_html ?>
+                </div>
+            </td> -->
+            <td class="action-btn">
+
+                <button onclick="window.location.href='./orderDetails.php?id=<?= $o->orderID ?>'">Detail</button>
+            </td>
+        </tr>
+        <!-- <?php } ?> -->
+    </tbody>
 </table>
 
 <?php
-include '../footer.php';
+include 'footer.php';

@@ -1,6 +1,6 @@
 <?php
+require 'header.php';
 $_title = 'User Profile';
-require '../../_base.php';
 // auth('Member');
 $_SESSION['userId'] = 1;
 
@@ -104,6 +104,7 @@ if (is_post()) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,8 +114,9 @@ if (is_post()) {
     <script src="../JS/userProfile.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-    <div id="info"><?= temp('info') ?></div>       
+    <div id="info"><?= temp('info') ?></div>
     <div class="account-container">
         <div class="account-details">
             <h1>Profile</h1>
@@ -122,29 +124,32 @@ if (is_post()) {
                 <div class="profile-photo-container" onmouseover="showIcons()" onmouseout="hideIcons()">
                     <label class="upload" tabindex="0">
                         <?= html_file('userPic', 'image/*', 'hidden') ?>
-                        <img id="profilePhoto" src="/User/image/<?= $userPic ?>" alt="Profile Photo" class="profile-photo">
+                        <img id="profilePhoto" src="/User/image/<?= $userPic ?>" alt="Profile Photo"
+                            class="profile-photo">
                         <i class="fas fa-edit edit-photo-icon"></i>
                     </label>
                     <?= err('userPic') ?>
                 </div>
-              
+
                 <div class="info-row">
                     <label for="userEmail" class="label">Email</label>
-                    <input type="email" id="userEmail" name="userEmail" class="value" value="<?= isset($email) ? $email : $result->userEmail ?>">
+                    <input type="email" id="userEmail" name="userEmail" class="value"
+                        value="<?= isset($email) ? $email : $result->userEmail ?>">
                 </div>
-                  <div class='error'>
+                <div class='error'>
                     <?php
                         if(isset($_err['userEmail']) && $_err['userEmail'] != null){
                             echo "<b><p>" . $_err['userEmail'] . "</p></b>";
                         }
                     ?>
                 </div>
-               
+
                 <div class="info-row">
                     <label for="userName" class="label">Username</label>
-                    <input type="text" id="userName" name="userName" class="value" value="<?= isset($userName) ? $userName : $result->userName ?>">
+                    <input type="text" id="userName" name="userName" class="value"
+                        value="<?= isset($userName) ? $userName : $result->userName ?>">
                 </div>
-                 <div class='error'>
+                <div class='error'>
                     <?php
                         if(isset($_err['userName'])){
                             echo "<b><p>" . $_err['userName'] . "</p></b>";
@@ -153,9 +158,10 @@ if (is_post()) {
                 </div>
                 <div class="info-row">
                     <label for="userPhoneNo" class="label">Contact</label>
-                    <input type="text" id="userPhoneNo" name="userPhoneNo" class="value" value="<?= isset($contact) ? $contact : $result->userPhoneNo ?>">
+                    <input type="text" id="userPhoneNo" name="userPhoneNo" class="value"
+                        value="<?= isset($contact) ? $contact : $result->userPhoneNo ?>">
                 </div>
-                 <div class='error'>
+                <div class='error'>
                     <?php
                         if(isset($_err['userPhoneNo'])){
                             echo "<b><p>" . $_err['userPhoneNo'] . "</p></b>";
@@ -165,35 +171,40 @@ if (is_post()) {
                 </div>
                 <section>
                     <button type="submit">Update</button>
-                    <button type="button" class="btn-back" onclick="window.location.href='../../index.php'">Back</button>
+                    <button type="button" class="btn-back"
+                        onclick="window.location.href='../../index.php'">Back</button>
                 </section>
             </form>
         </div>
     </div>
 
     <script>
-        // Preview photo
-        $('label.upload input[type=file]').on('change', e => {
-            const f = e.target.files[0];
-            const img = $(e.target).siblings('img')[0];
-            if (!img) return;
+    // Preview photo
+    $('label.upload input[type=file]').on('change', e => {
+        const f = e.target.files[0];
+        const img = $(e.target).siblings('img')[0];
+        if (!img) return;
 
-            img.dataset.src ??= img.src;
+        img.dataset.src ?? = img.src;
 
-            if (!f) {
-                // If no file is selected
-                return;
-            }
+        if (!f) {
+            // If no file is selected
+            return;
+        }
 
-            if (f.type.startsWith('image/')) {
-                // Set the new image URL as preview
-                img.src = URL.createObjectURL(f);
-            } else {
-                // Reset to the default image if the file is not valid
-                img.src = img.dataset.src;
-                e.target.value = ''; // Clear the file input value
-            }
-        });
+        if (f.type.startsWith('image/')) {
+            // Set the new image URL as preview
+            img.src = URL.createObjectURL(f);
+        } else {
+            // Reset to the default image if the file is not valid
+            img.src = img.dataset.src;
+            e.target.value = ''; // Clear the file input value
+        }
+    });
     </script>
 </body>
+
 </html>
+
+<?php
+include 'footer.php';
