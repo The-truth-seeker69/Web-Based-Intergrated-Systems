@@ -1,6 +1,5 @@
 <?php
-require '_base.php';
-include "User/page/header.php";
+include "./User/page/header.php";
 
 ?>
 
