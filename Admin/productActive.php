@@ -1,5 +1,5 @@
 <?php
-$_title = 'ABC - Top 1 in Malaysia';  // Set page title
+$_title = 'Product';  // Set page title
 require '../_base.php';
 include '../head.php';
 

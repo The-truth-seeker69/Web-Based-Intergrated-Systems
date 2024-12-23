@@ -1,5 +1,5 @@
 <?php
-$_title = 'Product';  // Set page title
+$_title = 'Category';  // Set page title
 require '../_base.php';
 include '../head.php';
 
@@ -32,23 +32,26 @@ if (is_post()) {
     if ($stmt->fetchColumn() > 0) {
         temp('info', 'Category Already exist !!!');
             redirect('categoryDetail.php');
+    }
         // Insert the category into the database
+    else{
         $stm = $_db->prepare('INSERT INTO category(categoryName,categoryDesc)
                               VALUES(?, ?)');
-     
-        if ($stmtInsert->execute([$categoryName, $categoryDesc])) {
-            temp('info', 'Category added successfully');
-            redirect('categoryDetail.php');
-        } else {
+                        
+    if ($stm->execute([$categoryName, $categoryDesc])) {
+        temp('info', 'Category added successfully');
+        redirect('categoryDetail.php');
+    } else {
             temp('info', 'Fail to add new category, Try later.');
             redirect('categoryDetail.php');
+            }
         }
-    }
-}
+} 
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addCategory.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="AdminCss/addCategory.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -66,7 +69,7 @@ if (is_post()) {
     <?= err('categoryDesc') ?>
 
     <section>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
         <button type="reset">Reset</button>
         <button type="button" onclick="window.location.href='categoryDetail.php'">Back To Category List</button>  <!-- Redirect with JavaScript -->
     </section>

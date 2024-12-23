@@ -1,5 +1,5 @@
 <?php
-$_title = 'Product';  // Set page title
+$_title = 'Category';  // Set page title
 require '../_base.php';
 include '../head.php';
 
@@ -26,6 +26,15 @@ $s = $stm->fetch();
         }
         else if (strlen($categoryName) > 100) {
             $_err['categoryName'] = 'Maximum length 100';
+        }
+        else {
+            // Check if the product name already exists in the database, excluding the current product ID
+            $checkStmt = $_db->prepare('SELECT COUNT(*) FROM category WHERE categoryName = ? AND categoryID != ?');
+            $checkStmt->execute([$categoryName, $categoryID]);
+            
+            if ($checkStmt->fetchColumn() > 0) {  // If a product with the same name exists
+                $_err['categoryName'] = 'Product name already exists';
+            }
         }
         
         // Validate name
@@ -67,8 +76,8 @@ $s = $stm->fetch();
     <?= html_textarea('categoryDesc', 'maxlength="200"') ?>
     <?= err('categoryDesc') ?>
 
-    <section>
-        <button>Submit</button>
+    <section style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <button type="submit">Submit</button>
         <button type="reset">Reset</button>
         <button type="button" onclick="window.location.href='categoryDetail.php'">Back To Category List</button> 
     </section>

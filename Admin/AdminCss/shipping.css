@@ -1,0 +1,88 @@
+form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+form input[type="search"] {
+    width: 80%;
+    height: 80%;
+}
+
+/* Search button styling */
+form button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #2b587a;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover effect for search button */
+form button:hover {
+    background-color: #7bb6e3;
+}
+
+/* Red out-of-stock status styling */
+.inactive {
+    color: red;
+    font-weight: bold;
+}
+
+.buttonDesign form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.buttonDesign form button {
+    display: inline-block;
+    padding: 8px 15px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.buttonDesign form button:hover {
+    background-color: #ff6666;
+}
+
+.buttonDesign form button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}
+/* Styling for the Update button */
+.buttonDesign form .update {
+    display: inline-block;              /* Ensures the button is inline-block */
+    padding: 8px 15px;                 /* Provides spacing inside the button */
+    border: none;                      /* Removes default border */
+    background-color: #4caf50;         /* Sets a green background color */
+    color: white;                      /* Sets the text color to white */
+    border-radius: 4px;                /* Adds rounded corners */
+    font-size: 14px;                   /* Sets the font size */
+    cursor: pointer;                   /* Changes cursor to pointer on hover */
+    text-transform: uppercase;         /* Makes the text uppercase */
+    font-weight: bold;                 /* Makes the text bold */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the Update button */
+.buttonDesign form .update:hover {
+    background-color: #45a049;         /* Slightly darker green on hover */
+}

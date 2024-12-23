@@ -3,7 +3,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  }
 
-.categoryForm {
+.shippingForm {
     width: 100%;
     max-width: 500px;  
     margin: 0 auto;    
@@ -14,7 +14,7 @@
 }
 
 /* Label styling */
-.categoryForm label {
+.shippingForm label {
     display: block;         
     font-weight: bold;     
     margin-bottom: 5px;     
@@ -22,9 +22,9 @@
 }
 
 /* Input field styles */
-.categoryForm input[type="text"], 
-.categoryForm input[type="radio"], 
-.categoryForm input[type="number"],
+.shippingForm input[type="text"], 
+.shippingForm input[type="radio"], 
+.shippingForm input[type="number"],
 textarea  {
     width: 95%;          
     padding: 10px;         
@@ -34,7 +34,7 @@ textarea  {
     font-size: 14px;       
 }
 
-.categoryForm select {
+.shippingForm select {
     width: 100%;          
     padding: 10px;         
     margin-bottom: 8px;  
@@ -43,9 +43,9 @@ textarea  {
     font-size: 14px;    
 }
 /* Focus effect for inputs */
-.categoryForm input[type="text"]:focus,
-.categoryForm select:focus,
-.categoryForm input[type="radio"]:focus {
+.shippingForm input[type="text"]:focus,
+.shippingForm select:focus,
+.shippingForm input[type="radio"]:focus {
     border-color: #007bff;  
     outline: none;          
 }
@@ -80,7 +80,7 @@ section {
     opacity: 0;
 }
   
-  .categoryForm button {
+  .shippingForm button {
     padding: 10px 20px;
     font-size: 14px;
     border: none;
@@ -89,30 +89,30 @@ section {
     transition: background-color 0.3s ease;
   }
 
-.categoryForm button[type="submit"] {
+.shippingForm button[type="submit"] {
     background-color: #007bff;
     color: #fff;
   }
   
-  .categoryForm button[type="submit"]:hover {
+  .shippingForm button[type="submit"]:hover {
     background-color: #0056b3;
   }
   
-  .categoryForm button[type="reset"] {
+  .shippingForm button[type="reset"] {
     background-color: #6c757d;
     color: #fff;
   }
   
-  .categoryForm button[type="reset"]:hover {
+  .shippingForm button[type="reset"]:hover {
     background-color: #5a6268;
   }
   
-  .categoryForm button[type="button"] {
+  .shippingForm button[type="button"] {
     background-color: #28a745;
     color: #fff;
   }
   
-  .categoryForm button[type="button"]:hover {
+  .shippingForm button[type="button"]:hover {
     background-color: #218838;
   }
 

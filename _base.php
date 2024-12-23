@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Kuala_Lumpur');
 session_start();
 function is_post() {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -59,6 +60,12 @@ function html_number($key, $attr = '') {
     $value = encode($GLOBALS[$key] ?? '');  // Encode the value (from global) before displaying it
     echo "<input type='number' id='$key' name='$key' value='$value' $attr>";
 }
+
+function html_datetime($key, $attr = '') {
+    $value = encode($GLOBALS[$key] ?? '');  // Encode the value (from global) before displaying it
+    echo "<input type='datetime-local' id='$key' name='$key' value='$value' $attr>";
+}
+
 
 
 // Generate <input type='search'>
@@ -166,7 +173,7 @@ $_orderStatus = [
 
 //remember to change
 //
-$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categoryDesc <> "Inactive"')
+$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categoryDesc != "Inactive"')
                  ->fetchAll(PDO::FETCH_KEY_PAIR);
 
 

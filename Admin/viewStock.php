@@ -57,22 +57,6 @@ form button:hover {
 }
     </style>
 
-<script>
-$(document).ready(function() {
-    $('#add-stock-btn').click(function() {
-        const quantity = prompt("Please enter the quantity to add:");
-
-        if (quantity && !isNaN(quantity) && parseInt(quantity) > 0) {
-            $('#restock-quantity').val(quantity); // Set the hidden input value
-            $('#restock-form').submit(); // Submit the form
-        } else {
-            alert('Invalid input. Please try again.');
-        }
-    });
-});
-</script>
-
-
 </head>
 
 <main>
@@ -107,7 +91,6 @@ $(document).ready(function() {
         <td><?= $s->prodStatus ?></td>
         <td class="buttonDesign">
             <!-- Here is the button for view, update, and also the delete -->
-            <button data-get="productActive.php?prodID=<?= $s->prodID ?>" data-confirm>Active</button>
             <button class="add-stock-btn" data-post="productRestock.php?prodID=<?= $s->prodID ?>">Add stock</button>
 
         </td>
