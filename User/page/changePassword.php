@@ -88,6 +88,7 @@ if (is_post()) {
     <title>Change Password</title>
     <link rel="stylesheet" href="../css/changePassword.css">
     <script src="../../script/app.js"></script>
+    <script src="../JS/userProfile.js"></script>
 </head>
 <body>
     <div class="container">

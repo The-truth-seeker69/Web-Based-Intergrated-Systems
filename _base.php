@@ -216,4 +216,10 @@ function is_email($value) {
     return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
 }
 
+// Is contact?
+function is_contact($contact) {
+    return preg_match('/^01[0-9]-\d{7}$/', $contact);
+}
+
+
 ?>

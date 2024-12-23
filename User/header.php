@@ -23,7 +23,7 @@
 
 
         <div id="header-brand">
-            <h1><a href="/">Unpopular </a></h1>
+            <h1><a href="index.php"><img src='/image/logo6.jpg' style='width:75px; height:70px;'/> </a></h1>
         </div>
 
         <ul class="nav-links">
