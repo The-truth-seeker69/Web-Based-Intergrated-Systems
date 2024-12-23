@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Style/general/register.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../../script/register.js"></script>
     <title>Create Account</title>
 </head>
 <body>
     <?php 
     require '../../_base.php';
+    $captcha_key = 'admin_registration_captcha';
+    if (!isset($_SESSION['adminFormStage'])) {
+        $_SESSION['adminFormStage'] = 'register';
+    }
+
     if(is_post()){
+
+        if (isset($_POST['register'])) {
 
         $name=req('name');
         $email = req('email');
@@ -96,7 +105,7 @@
 
         if (empty($captcha)) {
             $_err['captcha'] = 'CAPTCHA is required!';
-        } else if ($_SESSION['captcha'] !== $captcha) {
+        } else if ($_SESSION[$captcha_key] !== $captcha) {
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
@@ -110,38 +119,94 @@
             }
         } 
 
-        if(!in_array(true, $_err)){//Passed all form validation and ready for db insert        
+        if(!in_array(true, $_err)){//Passed all form validation and ready for db insert  
+            
+            $otp = random_int(100000, 999999);
+            $_SESSION['admin_otp'] = $otp;
+            $_SESSION['admin_otp_expiry'] = time() + 300; // 5 minutes
+            $_SESSION['admin_registration_data'] = [
+                'name' => $name,
+                'email' => $email,
+                'password' => $newPass,
+                'phone' => $phone,
+                'photo' => $pfp ? file_get_contents($pfp->tmp_name) : null,
+                'autofill' => $autofill
+            ];
 
-            if($pfp){//If there is an image
-            $photo=save_photo($pfp,'../image');
+            $m = get_mail();
+            $m->addAddress($email, $name);
+            $m->isHTML(true);
+            $m->Subject = 'Account Activation';
+            $m->Body = "
+                <div style='border-bottom:1px solid #eee'>
+                <a href='' style='font-size:1.5em;color: #000000;text-decoration:none;font-weight:650'>Unpopular</a>
+                </div>
+                <p>Dear $name,<p>
+                <p>
+                    Thank you for choosing Unpopular. Use the following OTP to activate your account. OTP is valid for 5 minutes.
+                </p>
+                <h2 style='background: #000000;margin: 0 auto;width: max-content;padding: 0 10px;color: #ffffff;border-radius: 4px;'>$otp</h2>
+                <hr style='border:none;border-top:1px solid #eee' />
+                <p>Regards,</p>
+                <p>Unpopular</p>
+            ";
+            $m->send();
+            $_SESSION['adminFormStage'] = 'verify';
 
-            $stm=$_db->prepare('INSERT INTO admin (adminName, adminemail, adminpassword, adminphoneno, adminpic, adminRole) VALUES (?, ?, SHA1(?), ?, ?, ?)');
-            $success=$stm->execute([$name,$email,$newPass,$phone,$photo,'Admin']);
-            }else{//Register without image
-                $stm=$_db->prepare('INSERT INTO admin (adminName, adminEmail, adminPassword, adminPhoneNo, adminRole) VALUES (?, ?, SHA1(?), ?, ?)');
-                $success=$stm->execute([$name,$email,$newPass,$phone,'Admin']);
-            }
-            if($success){
-                if($autofill){
-                session_start();
-                $_SESSION['autofillAdminName'] = $name;
-                $_SESSION['autofillAdminPass'] = $newPass;
-                }
-                redirect('adminLogin.php');
-            }
         }
+    }elseif (isset($_POST['verify'])) {
+
+        if (time() > $_SESSION['admin_otp_expiry']) {
+            unset($_SESSION['admin_otp'], $_SESSION['admin_otp_expiry']); // Clear OTP-related session data
+            $_SESSION['adminFormStage'] = 'register'; 
+        }
+
+        $inputOtp=req('otpInput');
+        if($inputOtp==''){
+            $_err['otpInput']='This field is required!';
+        }else{
+
+        if ($inputOtp == $_SESSION['admin_otp'] && time() <= $_SESSION['admin_otp_expiry']) {//otp correct
+            $formData = $_SESSION['admin_registration_data'];
+            if($formData['photo']!=null){//insert with image
+                $photo=save_photo_from_data($formData['photo'],'../../image/admin/uploads');
+                $stm=$_db->prepare('INSERT INTO admin (adminName, adminemail, adminpassword, adminphoneno, adminpic, adminRole) VALUES (?, ?, SHA1(?), ?, ?, ?)');
+                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],$photo,'Admin']);
+            }else{
+                $stm=$_db->prepare('INSERT INTO admin (adminName, adminEmail, adminPassword, adminPhoneNo, adminRole) VALUES (?, ?, SHA1(?), ?, ?)');
+                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],'Admin']);
+            }
+
+            if(!empty($success)){
+                if($formData['autofill']){
+                $_SESSION['autofillAdminName'] = $formData['name'];
+                $_SESSION['autofillAdminPass'] = $formData['password'];
+                }
+                unset($_SESSION['admin_otp'], $_SESSION['admin_otp_expiry'], $_SESSION['admin_registration_data']);
+                $_SESSION['adminFormStage']='register'; // Reset form stage
+                redirect('adminLogin.php');
+                
+            }
+
+        }else{
+            $_err['otpInput']='OTP is incorrect!';
+            $_SESSION['adminFormStage'] = 'verify';
+        }
+    }
+
+    }
 
     }
     ?>
     <div id="mainPanel">
-        
-        <form method="post" id="loginForm">
+    <?php if ($_SESSION['adminFormStage'] === 'register'): ?>
+        <form method="post" enctype="multipart/form-data" id="loginForm">
             <div><h2>Create New Admin</h2></div>
 
             <div class="picrow">
             <label class="profilepic">
             <?= html_file('photo', 'image/*', 'hidden') ?>
-            <img src="../../image/user/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
+            <img src="../../image/admin/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
             </label>
             </div>
 
@@ -206,7 +271,7 @@
 
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php" alt="CAPTCHA" />
+            <img src="../../lib/captcha.php?form_type=admin_registration" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
 
@@ -217,15 +282,28 @@
                 
             </div>
 
-            <button type="submit" class="login-btn">Confirm</button>
+            <button type="submit" class="btn" name="register">Confirm</button>
 
         </form>
+        <?php elseif ($_SESSION['adminFormStage'] === 'verify'): ?>
+
+        <form method="post" action="">
+            <p>An OTP has been sent to your email. </p><p>Please enter it below to activate your account:</p>
+            <div class="input-group" id="otp" >
+            <?= html_text('otpInput','placeholder="Enter OTP"')?>
+            </div>
+            <?= err('otpInput')?>
+
+            <button type="submit" class="btn" name="verify">Verify OTP</button>
+        </form>
+
+        <?php endif; ?>
     </div>
 
     <div id="signupLink">
         
         <div>or</div>
-        <div id="back"><a href="index.php">Continue As Guest</a></div>
+        <div id="back"><a href="../../index.php">Continue As Guest</a></div>
     </div>
     
 </body>

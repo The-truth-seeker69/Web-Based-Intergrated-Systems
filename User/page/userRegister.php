@@ -12,9 +12,11 @@
 <body>
     <?php 
     require '../../_base.php';
+    $captcha_key = 'user_registration_captcha';
     if (!isset($_SESSION['formStage'])) {
         $_SESSION['formStage'] = 'register';
     }
+
     if(is_post()){
         
         if (isset($_POST['register'])) {
@@ -103,7 +105,7 @@
 
         if (empty($captcha)) {
             $_err['captcha'] = 'CAPTCHA is required!';
-        } else if ($_SESSION['captcha'] !== $captcha) {
+        } else if ($_SESSION[$captcha_key] !== $captcha) {
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
@@ -177,7 +179,6 @@
 
             if(!empty($success)){
                 if($formData['autofill']){
-                session_start();
                 $_SESSION['autofillName'] = $formData['name'];
                 $_SESSION['autofillPass'] = $formData['password'];
                 }
@@ -274,7 +275,7 @@
             
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php" alt="CAPTCHA" />
+            <img src="../../lib/captcha.php?form_type=user_registration" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
                     

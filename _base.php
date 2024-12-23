@@ -273,7 +273,7 @@ function get_mail() {
     $m->Username = 'liaw.casual@gmail.com';
     $m->Password = 'buvq yftx klma vezl';
     $m->CharSet = 'utf-8';
-    $m->setFrom($m->Username, 'Unpopular Admin');
+    $m->setFrom($m->Username, 'Unpopular');
 
     return $m;
 }
@@ -292,4 +292,8 @@ function save_photo_from_data($data, $folder, $width = 200, $height = 200) {
     unlink($tempFile);
 
     return $photo;
+}
+
+function base($path = '') {
+    return "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/$path";
 }
