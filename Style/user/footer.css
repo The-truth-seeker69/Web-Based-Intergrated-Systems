@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 1000px;
+
 }
 
 main {
@@ -21,7 +22,7 @@ main {
     color: white;
     padding: 40px 20px;
     font-family: 'Playfair Display', serif;
-
+    /* margin-top: 25% */
 }
 
 .footer-container {
