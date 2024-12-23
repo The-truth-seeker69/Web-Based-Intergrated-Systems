@@ -17,3 +17,6 @@ $(()=>{
     });
 });
 
+$(document).ready(function () {
+    $('input[name="otpInput"]').focus();
+});

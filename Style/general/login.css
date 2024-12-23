@@ -4,7 +4,7 @@ html {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    background-image: url('../image/img3.jpg');
+    background-image: url('../../image/user/display/img3.jpg');
 }
 
 html::before {
@@ -125,8 +125,18 @@ input[type="checkbox"] {
     font-size: 14px;
 }
 
+#captchabox{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
 
-
+div #captcha{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background: #f9f9f9;
+}
 
 #info {
     position: fixed;

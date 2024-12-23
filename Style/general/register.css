@@ -4,7 +4,7 @@ html {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    background-image: url('../image/img2.jpg');
+    background-image: url('../../image/user/display/img2.jpg');
     background-size: cover;
 }
 
@@ -50,7 +50,7 @@ html::before {
     width: 50%;
 }
 
-#phone{
+#phone,#otp{
     width: auto;
 }
 
@@ -94,7 +94,7 @@ html::before {
     text-decoration: underline;
 }
 
-.login-btn {
+.btn {
     width: 100%;
     background: #000000;
     color: white;
@@ -107,7 +107,7 @@ html::before {
     transition: background 0.3s;
 }
 
-.login-btn:hover {
+.btn:hover {
     background: #424242;
 }
 
@@ -165,4 +165,18 @@ input[type="checkbox"] {
 
 .picrow> .err{
     width: auto;
+}
+
+#captchabox{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+div #captcha{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background: #f9f9f9;
+    width: 45%;
 }
