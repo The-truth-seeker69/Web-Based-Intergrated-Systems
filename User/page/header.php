@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php @include "../../base.php" ?>
+<?php @include "base.php" ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page </title>
-    <link rel="stylesheet" href="../../Style/home.css">
-    <link rel="stylesheet" href="../../Style/header.css">
-    <link rel="stylesheet" href="../../Style/footer.css">
-
+    <link rel="stylesheet" href="/Style/user/home.css">
+    <link rel="stylesheet" href="/Style/user/header.css">
+    <link rel="stylesheet" href="/Style/user/footer.css">
     <script src="/script/cart.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
@@ -94,10 +94,7 @@
             <a href="javascript:void(0)" class="nav-item" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
             </a>
-
-
         </div>
-
     </header>
 
     </nav>

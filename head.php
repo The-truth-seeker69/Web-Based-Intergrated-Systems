@@ -7,7 +7,8 @@
     <title><?= $_title ?? 'Untitled' ?></title>
     <link rel="shortcut icon" href="/image/img1.jpg">
     <link rel="stylesheet" href="/Admin/AdminCss/adminBar.css">
-  
+    <link rel="stylesheet" href="/Admin/AdminCss/adminBar.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../script/app.js"></script>
 </head>
