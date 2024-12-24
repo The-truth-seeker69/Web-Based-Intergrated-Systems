@@ -1,9 +1,29 @@
 <?php
 session_start();
 
+$form_type = isset($_GET['form_type']) ? $_GET['form_type'] : 'user_login';
+
+switch ($form_type) {
+    case 'admin_login':
+        $session_key = 'admin_login_captcha';
+        break;
+    case 'admin_registration':
+        $session_key = 'admin_registration_captcha';
+        break;
+    case 'user_registration':
+        $session_key = 'user_registration_captcha';
+        break;
+    case 'user_reset':
+        $session_key = 'user_reset_captcha';
+        break;
+    default:
+        $session_key = 'user_login_captcha';
+        break;
+}
+
 // Generate random string
 $captcha_text = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(6/strlen($x)) )),1,6);
-$_SESSION['captcha'] = $captcha_text; // Store the captcha text in session
+$_SESSION[$session_key] = $captcha_text; // Store the captcha text in session
 
 // Create the image
 header('Content-Type: image/png');

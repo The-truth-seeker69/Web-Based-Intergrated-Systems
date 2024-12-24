@@ -38,6 +38,11 @@ html::before {
     justify-content: center;
 }
 
+#mainPanel p{
+    display: flex;
+    justify-content: center;
+}
+
 .input-group {
     display: flex;
     align-items: center;
