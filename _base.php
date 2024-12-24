@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
 $_user = $_SESSION['user'] ?? null;
+
 function is_post()
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -48,8 +52,7 @@ function html_file($key, $accept = '', $attr = '')
 
 
 // Generate <textarea>
-function html_textarea($key, $attr = '')
-{
+function html_textarea($key, $attr = '') {
     $value = encode($GLOBALS[$key] ?? '');  // Get the value from global variable
     echo "<textarea id='$key' name='$key' $attr>$value</textarea>";  // Generate the <textarea> element
 }
@@ -67,6 +70,12 @@ function html_number($key, $attr = '')
     $value = encode($GLOBALS[$key] ?? '');  // Encode the value (from global) before displaying it
     echo "<input type='number' id='$key' name='$key' value='$value' $attr>";
 }
+
+function html_datetime($key, $attr = '') {
+    $value = encode($GLOBALS[$key] ?? '');  // Encode the value (from global) before displaying it
+    echo "<input type='datetime-local' id='$key' name='$key' value='$value' $attr>";
+}
+
 
 
 // Generate <input type='search'>
@@ -181,8 +190,65 @@ $_orderStatus = [
 
 //remember to change
 //
-$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categoryDesc <> "Inactive"')
-    ->fetchAll(PDO::FETCH_KEY_PAIR);
+$_productCategory = $_db->query('SELECT categoryID, categoryName FROM category WHERE categoryDesc != "Inactive"')
+                 ->fetchAll(PDO::FETCH_KEY_PAIR);
+
+// Authorization
+// function auth(...$roles) {
+//     global $_user;
+//     if ($_user) {
+//         if ($roles) {
+//             if (in_array($_user->role, $roles)) {
+//                 return; // OK
+//             }
+//         }
+//         else {
+//             return; // OK
+//         }
+//     }
+
+//     redirect('/login.php');
+// }
+
+
+// Crop, resize and save photo
+function save_photo($f, $folder, $width = 200, $height = 200)
+{
+    $photo = uniqid() . '.jpg';
+
+    require_once 'lib/SimpleImage.php';
+    $img = new SimpleImage();
+    $img->fromFile($f->tmp_name)
+        ->thumbnail($width, $height)
+        ->toFile("$folder/$photo", 'image/jpeg');
+
+    return $photo;
+}
+
+// Is GET request?
+function is_get()
+{
+    return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
+// Generate <input type='password'>
+function html_password($key, $attr = '')
+{
+    $value = encode($GLOBALS[$key] ?? '');
+    echo "<input type='password' id='$key' name='$key' value='$value' $attr>";
+}
+
+// Is email?
+function is_email($value)
+{
+    return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+// Is contact?
+function is_contact($contact)
+{
+    return preg_match('/^01[0-9]-\d{7}$/', $contact);
+}
 
 // Authorization
 // function auth(...$roles) {

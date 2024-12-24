@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>Member Login</title>
 </head>
+
 <body>
-    <?php 
+    <?php
     require '../../_base.php';
     $captcha_key = 'user_login_captcha';
     if (isset($_COOKIE['remember_token'])) {
         $token = $_COOKIE['remember_token'];
-    
+
         // Check if the token matches a user in the database
         $stm = $_db->prepare('SELECT * FROM user WHERE rememberToken = ?');
         $stm->execute([$token]);
         $user = $stm->fetch();
-    
+
         if ($user) {
             $_SESSION['user'] = $user;
             $_SESSION['userId'] = $user->userID;
@@ -28,26 +30,26 @@
     }
 
     if (isset($_SESSION['autofillName'])) {
-        $GLOBALS['name'] = $_SESSION['autofillName']; 
-        unset($_SESSION['autofillName']); 
+        $GLOBALS['name'] = $_SESSION['autofillName'];
+        unset($_SESSION['autofillName']);
     }
     if (isset($_SESSION['autofillPass'])) {
-        $GLOBALS['pass'] = $_SESSION['autofillPass']; 
-        unset($_SESSION['autofillPass']); 
+        $GLOBALS['pass'] = $_SESSION['autofillPass'];
+        unset($_SESSION['autofillPass']);
     }
 
-    if(is_post()){
-        $name=req('name');
-        $pass=req('pass');
-        $remember=req('remember');
-        $captcha=req('captcha');
+    if (is_post()) {
+        $name = req('name');
+        $pass = req('pass');
+        $remember = req('remember');
+        $captcha = req('captcha');
 
-        if($name==''){
-            $_err['name']='This field is required!';
+        if ($name == '') {
+            $_err['name'] = 'This field is required!';
         }
 
-        if($pass==''){
-            $_err['pass']='This field is required!';
+        if ($pass == '') {
+            $_err['pass'] = 'This field is required!';
         }
 
         if (empty($captcha)) {
@@ -56,15 +58,15 @@
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
-        if(!$_err){
-            
-                $stm=$_db->prepare('SELECT * FROM user WHERE username=? AND userPassword = SHA1(?)');
-                $stm->execute([$name,$pass]);
-                $user=$stm->fetch();
+        if (!$_err) {
 
-                if ($_SESSION[$captcha_key] !== $captcha) {
-                    $_err['captcha'] = 'CAPTCHA is incorrect!';
-                }
+            $stm = $_db->prepare('SELECT * FROM user WHERE username=? AND userPassword = SHA1(?)');
+            $stm->execute([$name, $pass]);
+            $user = $stm->fetch();
+
+            if ($_SESSION[$captcha_key] !== $captcha) {
+                $_err['captcha'] = 'CAPTCHA is incorrect!';
+            }
 
                 if($user){//password and username match
 
@@ -96,31 +98,33 @@
     }
     ?>
     <div id="mainPanel">
-        
+
         <form method="post" class="loginForm">
-        <div><h2>Member Login</h2></div>
-            <div class="input-group">
-            <i class="fa-solid fa-user"></i>
-                <?= html_text('name','placeholder="Username"')?>
+            <div>
+                <h2>Member Login</h2>
             </div>
-            <?= err('name')?>
             <div class="input-group">
-            <i class="fa-solid fa-lock"></i>
-                <?= html_password('pass','placeholder="Password"')?>
+                <i class="fa-solid fa-user"></i>
+                <?= html_text('name', 'placeholder="Username"') ?>
             </div>
-            
-            <?= err('pass')?>
-            <?= err('unmatch')?>
+            <?= err('name') ?>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <?= html_password('pass', 'placeholder="Password"') ?>
+            </div>
+
+            <?= err('pass') ?>
+            <?= err('unmatch') ?>
 
             <div id="captchabox">
-            <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php?form_type=user_login" alt="CAPTCHA" />
+                <?= html_text('captcha', 'placeholder="Enter what you see"') ?>
+                <img src="../../lib/captcha.php?form_type=user_login" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
             <?= err('status')?>
             <div class="actions">
                 <label>
-                    <?= html_checkbox('remember')?> Remember Me
+                    <?= html_checkbox('remember') ?> Remember Me
                 </label>
                 <a href="userReset.php" class="forgot-password">Forgot Password?</a>
             </div>
@@ -132,6 +136,7 @@
         <div>or</div>
         <div><a href="../../index.php">Continue as Guest</a></div>
     </div>
-    
+
 </body>
+
 </html>

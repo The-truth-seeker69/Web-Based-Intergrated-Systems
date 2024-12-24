@@ -1,0 +1,112 @@
+form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+form input[type="search"] {
+    width: 80%;
+    height: 80%;
+}
+
+/* Search button styling */
+form button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #2b587a;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover effect for search button */
+form button:hover {
+    background-color: #7bb6e3;
+}
+
+/* Red out-of-stock status styling */
+.out-of-stock {
+    color: red;
+    font-weight: bold;
+}
+
+.unavailable {
+    color: blue;
+    font-weight: bold;
+}
+
+/* General button styling */
+td.buttonDesign button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Detail button */
+td.buttonDesign button[data-get*="productDetail"] {
+    background-color: #4CAF50;
+    /* Green for view */
+    color: white;
+}
+
+td.buttonDesign button[data-get*="productDetail"]:hover {
+    background-color: #45a049;
+    /* Darker green on hover */
+}
+
+/* Update button */
+td.buttonDesign button[data-get*="productUpdate"] {
+    background-color: #007BFF;
+    /* Blue for update */
+    color: white;
+}
+
+td.buttonDesign button[data-get*="productUpdate"]:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+/* Delete button (default available state) */
+td.buttonDesign button.deleteButton {
+    background-color: #FF4D4D;
+    /* Red for delete */
+    color: white;
+}
+
+td.buttonDesign button.deleteButton:hover {
+    background-color: #FF6666;
+    /* Lighter red on hover */
+}
+
+/* Delete button for 'OutOfStock' (Restore state) */
+td.buttonDesign button.deleteButton.active {
+    background-color: #FFC107;
+    color: black;
+}
+
+td.buttonDesign button.deleteButton.active:hover {
+    background-color: #E0A800;
+}
+
+
+/* Interaction effect: Button press */
+td.buttonDesign button:active {
+    transform: scale(0.97);
+    /* Slight shrink on click */
+}

@@ -1,24 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
-
-// // function generate_product_id($pID) {  
-// function generate_product_id($pID) {  // 
-//     //Use $pID as the parameter for PDO connection
-//     // Query to get the highest product ID
-//     $stmt = $pID->query('SELECT MAX(prodID) AS max_id FROM product');
-//     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-//     $last_id = $row['max_id'] ?? 'PD0000'; 
-        
-//     // Extract the number part and increment it
-//     $new_number = str_pad((int) substr($last_id, 2) + 1, 4, '0', STR_PAD_LEFT);
-        
-//     // Format the new product ID as 'PD0001', 'PD0002', etc.
-//     return 'PD' . $new_number;
-
-//     }
+include 'header.php';
 
 //remember make sure only can upload the img only
 if (is_post()) {
@@ -76,7 +58,7 @@ if (is_post()) {
         $_err['book_category'] = 'Required';
     }
     else if (!array_key_exists($book_category, $_productCategory)) {
-        $_err['program_id'] = 'Invalid value';
+        $_err['book_category'] = 'Invalid value';
     }
 
     //purpose : allow multiple photo upload
@@ -91,7 +73,7 @@ if (is_post()) {
             $fileType = $files['type'][$key];
 
             if (!str_starts_with($fileType, 'image/')) {
-                $_err['prodPicture'] = 'Each file must be an image';
+                $_err['prodPicture'] = 'Must be an image';
                 break;
             }
         }
@@ -114,7 +96,7 @@ foreach ($files['name'] as $key => $fileName) {
     $img = new SimpleImage();
     $img->fromFile($fileTmpName)
         ->thumbnail(200, 200)
-        ->toFile("../image/$photo", 'image/jpeg'); // Save the image
+        ->toFile("AdminImage/$photo", 'image/jpeg'); // Save the image
 
     // Insert image into the productimage table
     $stm1 = $_db->prepare('INSERT INTO productimage (imageURL, imageAltText, prodID) VALUES (?, ?, ?)');
@@ -136,7 +118,8 @@ foreach ($files['name'] as $key => $fileName) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addProduct.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="../Style/admin/addProduct.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -174,8 +157,9 @@ foreach ($files['name'] as $key => $fileName) {
     <input type="file" id="prodPicture" name="prodPicture[]" accept="image/*" multiple onchange="showPreview(event)">
     <div id="preview"></div>
     <?= err('prodPicture') ?>
-    <section>
-        <button>Submit</button>
+
+    <section style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <button type="submit">Submit</button>
         <button type="reset">Reset</button>
         <button type="button" onclick="window.location.href='product.php'">Back To Product List</button>  <!-- Redirect with JavaScript -->
     </section>

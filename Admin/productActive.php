@@ -1,7 +1,6 @@
 <?php
-$_title = 'ABC - Top 1 in Malaysia';  // Set page title
-require '../_base.php';
-include '../head.php';
+$_title = 'Product';  // Set page title
+include 'header.php';
 
 $prodID = req('prodID');
 

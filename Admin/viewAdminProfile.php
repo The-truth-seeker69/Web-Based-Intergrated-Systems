@@ -1,13 +1,11 @@
 <?php
 // Start the session
-session_start();
 
 // Include necessary files
-include "../header.php";
+include "header.php";
 
 
-// Check what session variables are set
-auth();
+
 
 
 if (is_get()) {
@@ -18,6 +16,7 @@ if (is_get()) {
 ?>
 
 <body>
+    <div id="info"><?= temp('info') ?></div>
     <?php if ($a): ?>
         <form id="admin-profile-form" action="adminUpdateDetails.php?id=<?= htmlspecialchars($a->adminID) ?>" method="post">
 

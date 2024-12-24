@@ -1,0 +1,22 @@
+#about-us-hero {
+    background: url('/image/user/display/img5.jpg') center center / cover no-repeat;
+    height: 70vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 0;
+}
+
+
+#about-us-hero::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    opacity: 0.5;
+    z-index: -1;
+}

@@ -32,51 +32,35 @@ $(document).ready(function () {
     });
 });
 
+$(() => {
+    // Initiate POST request
+    $('[data-post]').on('click', function (e) {
+        e.preventDefault();
 
+        const confirmMessage = $(this).data('confirm'); // Get confirmation message
+        if (confirmMessage) {
+            const isConfirmed = confirm(confirmMessage); // Show confirmation dialog
+            if (!isConfirmed) {
+                return; // Exit if the user cancels
+            }
+        }
 
+        const url = $(this).data('post'); // Get the URL from data-post
+        const f = $('<form>').appendTo(document.body)[0];
+        f.method = 'POST';
+        f.action = url || location;
+        f.submit();
+    });
 
+    $('[data-get]').on('click', e => {
+        e.preventDefault();
+        const url = e.target.dataset.get;
+        console.log('Button clicked! URL:', url); // Debugging output
+        location = url || location;
+    });
 
-// Initiate POST request
-$('[data-post]').on('click', e => {
-    e.preventDefault();
-    const url = e.target.dataset.post;
-    const f = $('<form>').appendTo(document.body)[0];
-    f.method = 'POST';
-    f.action = url || location;
-    f.submit();
-});
-
-
-
-
-
-
-$('[data-get]').on('click', e => {
-    e.preventDefault();
-    const url = e.target.dataset.get;
-    console.log('Button clicked! URL:', url); // Debugging output
-    location = url || location;
-});
-
-
-// Initiate POST request
-$('[data-post]').on('click', e => {
-    e.preventDefault();
-    const url = e.target.dataset.post;
-    const f = $('<form>').appendTo(document.body)[0];
-    f.method = 'POST';
-    f.action = url || location;
-    f.submit();
-});
-
-// Confirmation message
-
-
-
-
-
-// confirmation 
-$('[data-confirm]').on('click', e => {
+   // Confirmation message
+   $('[data-confirmation]').on('click', e => {
     const text = e.target.dataset.confirm || 'Are you sure?';
     if (!confirm(text)) {
         e.preventDefault();
@@ -103,3 +87,24 @@ function temp($key, $value = null) {
         return $value;
     }
 }
+
+
+
+// photo preview
+$('label.upload input[type=file]').on('change', e => {
+    const f = e.target.files[0];
+    const img = $(e.target).siblings('img')[0];
+
+    if (!img) return;
+
+    img.dataset.src ??= img.src;
+
+    if (f?.type.startsWith('image/')) {
+        img.src = URL.createObjectURL(f);
+    }
+    else {
+        img.src = img.dataset.src;
+        e.target.value = '';
+    }
+});
+});

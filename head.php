@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/Admin/AdminCss/adminBar.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../script/app.js"></script>
+    <script src="/script/app.js"></script>
 </head>
 
 <body>
@@ -26,7 +26,8 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="../Admin/product.php">Product</a></li>
                     <li><a href="../Admin/order.php">Order</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="../Admin/shipping.php">Shipping</a></li>
+                    <li><a href="../Admin/discount.php">Discount</a></li>
                 </ul>
             </nav>
         </div>

@@ -1,84 +1,24 @@
 <?php
-$_title = 'ABC - Top 1 in Malaysia';  // Set page title
-require '../_base.php';
-include '../head.php';
+$_title = 'Stock';  // Set page title
+include 'header.php';
 
-// TODO: Modify the query to search by name, author, or prodID
     $stm = $_db->prepare('SELECT * FROM product WHERE prodStatus = "OutOfStock"');
     $stm->execute();
 
 // Fetch results
-$arr = $stm->fetchAll();
+    $arr = $stm->fetchAll();
 
 ?>
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css"> 
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/stock.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-
-form {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px auto;
-  padding: 10px;
-  max-width: 500px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Input field styling */
-form input[type="search"] {
-    width: 80%;
-    height: 80%;
-}
-
-/* Search button styling */
-form button {
-  padding: 8px 15px;
-  border: none;
-  background-color: #2b587a;
-  color: white;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* Hover effect for search button */
-form button:hover {
-  background-color: #7bb6e3;
-}
-
-.out-of-stock {
-    color: red; /* Change text color to red */
-    font-weight: bold;
-}
-    </style>
-
-<script>
-$(document).ready(function() {
-    $('#add-stock-btn').click(function() {
-        const quantity = prompt("Please enter the quantity to add:");
-
-        if (quantity && !isNaN(quantity) && parseInt(quantity) > 0) {
-            $('#restock-quantity').val(quantity); // Set the hidden input value
-            $('#restock-form').submit(); // Submit the form
-        } else {
-            alert('Invalid input. Please try again.');
-        }
-    });
-});
-</script>
-
-
 </head>
 
 <main>
      <!-- Here is search-->
 <form>
-    <?= html_search('item') ?>
+    <?= html_search('item', 'placeholder="Enter Book ID"') ?>
     <button>Search</button>  <!-- default is submit -->
 </form>
 
@@ -107,7 +47,6 @@ $(document).ready(function() {
         <td><?= $s->prodStatus ?></td>
         <td class="buttonDesign">
             <!-- Here is the button for view, update, and also the delete -->
-            <button data-get="productActive.php?prodID=<?= $s->prodID ?>" data-confirm>Active</button>
             <button class="add-stock-btn" data-post="productRestock.php?prodID=<?= $s->prodID ?>">Add stock</button>
 
         </td>

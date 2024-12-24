@@ -1,5 +1,9 @@
-/* Basic form container */
-.productForm {
+ /* Body Global Styles */
+ body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+.categoryForm {
     width: 100%;
     max-width: 500px;  
     margin: 0 auto;    
@@ -10,7 +14,7 @@
 }
 
 /* Label styling */
-.productForm label {
+.categoryForm label {
     display: block;         
     font-weight: bold;     
     margin-bottom: 5px;     
@@ -18,9 +22,9 @@
 }
 
 /* Input field styles */
-.productForm input[type="text"], 
-.productForm input[type="radio"], 
-.productForm input[type="number"],
+.categoryForm input[type="text"], 
+.categoryForm input[type="radio"], 
+.categoryForm input[type="number"],
 textarea  {
     width: 95%;          
     padding: 10px;         
@@ -30,7 +34,7 @@ textarea  {
     font-size: 14px;       
 }
 
-.productForm select {
+.categoryForm select {
     width: 100%;          
     padding: 10px;         
     margin-bottom: 8px;  
@@ -39,9 +43,9 @@ textarea  {
     font-size: 14px;    
 }
 /* Focus effect for inputs */
-.productForm input[type="text"]:focus,
-.productForm select:focus,
-.productForm input[type="radio"]:focus {
+.categoryForm input[type="text"]:focus,
+.categoryForm select:focus,
+.categoryForm input[type="radio"]:focus {
     border-color: #007bff;  
     outline: none;          
 }
@@ -75,6 +79,42 @@ section {
     top: -100px;
     opacity: 0;
 }
+  
+  .categoryForm button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+.categoryForm button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .categoryForm button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .categoryForm button[type="reset"] {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .categoryForm button[type="reset"]:hover {
+    background-color: #5a6268;
+  }
+  
+  .categoryForm button[type="button"] {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .categoryForm button[type="button"]:hover {
+    background-color: #218838;
+  }
 
 #info:not(:empty) {
     animation: fade 5s;

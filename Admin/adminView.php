@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "../header.php";
+include "header.php";
 
 
 $fields = [
@@ -40,15 +39,10 @@ $params = [
     $role ?? ''
 
 ];
-require_once '../../lib/SimplePager.php';
+require_once '../lib/SimplePager.php';
 $p = new SimplePager($sql, $params, 10, $page);
 $arr = $p->result;
-
-
 ?>
-
-
-
 
 <main>
     <form id="search-filter">
