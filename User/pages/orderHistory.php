@@ -42,7 +42,7 @@ $arr = $stm->fetchAll();
         </tr>
     </thead>
     <tbody>
-        <?php 
+        <?php
         foreach ($arr as $o) {
             // Fetch order items
             // $stm2 = $_db->prepare('SELECT * FROM `order_item` WHERE orderID = ?');
@@ -62,21 +62,21 @@ $arr = $stm->fetchAll();
             //                     </div>";
             // }
         ?>
-        <tr>
-            <td><?= $o->orderID ?></td>
-            <td><?= $o->orderDate ?></td>
-            <td class="grand-total"><?= $o->grandTotal ?></td>
-            <!-- <td>
+            <tr>
+                <td><?= $o->orderID ?></td>
+                <td><?= $o->orderDate ?></td>
+                <td class="grand-total"><?= $o->grandTotal ?></td>
+                <!-- <td>
                 <div class="order-details">
                     <?= $items_html ?>
                 </div>
             </td> -->
-            <td class="action-btn">
+                <td class="action-btn">
 
-                <button onclick="window.location.href='./orderDetails.php?id=<?= $o->orderID ?>'">Detail</button>
-            </td>
-        </tr>
-        <!-- <?php } ?> -->
+                    <button onclick="window.location.href='./orderDetails.php?id=<?= $o->orderID ?>'">Detail</button>
+                </td>
+            </tr>
+            <!-- <?php } ?> -->
     </tbody>
 </table>
 

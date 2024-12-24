@@ -1,7 +1,6 @@
 <?php
 
-require __DIR__ . '/../base.php';
-
+require __DIR__ . '/../_base.php';
 
 
 
@@ -24,8 +23,8 @@ require __DIR__ . '/../base.php';
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/script/app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="/script/app.js" defer></script>
 
 </head>
 
@@ -39,8 +38,8 @@ require __DIR__ . '/../base.php';
         <?php if ($_user && $_user->adminRole == 'Manager'): ?>
             <ul class="nav-links">
                 <li><a href="/Admin/home.php">Home</a></li>
-                <li><a href="/Admin/pages/memberView.php">Member</a></li>
-                <li><a href="/Admin/pages/adminView.php">Admin</a></li>
+                <li><a href="/Admin/memberView.php">Member</a></li>
+                <li><a href="/Admin/adminView.php">Admin</a></li>
                 <li><a href="">Product</a></li>
                 <li><a href="#">Order</a></li>
             </ul>
@@ -58,7 +57,7 @@ require __DIR__ . '/../base.php';
             <div id="profile-pic">
                 <img src="/image/admin/uploads/ppplaceholder.png" alt="Profile Picture">
                 <ul class="dropdown-menu">
-                    <li><a href="/Admin/pages/adminLogin.php">Login</a></li>
+                    <li><a href="/Admin/adminLogin.php">Login</a></li>
 
                 </ul>
             </div>
@@ -66,8 +65,8 @@ require __DIR__ . '/../base.php';
             <div id="profile-pic">
                 <img src="/image/admin/uploads/<?= $_user->adminPic ?>" alt=" Profile Picture">
                 <ul class="dropdown-menu">
-                    <li><a href="/Admin/pages/viewAdminProfile.php">View Profile</a></li>
-                    <li><a href="/Admin/pages/adminLogout.php">Logout</a></li>
+                    <li><a href="/Admin/viewAdminProfile.php">View Profile</a></li>
+                    <li><a href="/Admin/adminLogout.php">Logout</a></li>
                 </ul>
 
             </div>
