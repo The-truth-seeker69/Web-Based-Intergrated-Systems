@@ -26,15 +26,15 @@ require __DIR__ . '/../_base.php';
         <?php if ($_user && $_user->adminRole == 'Manager'): ?>
             <ul class="nav-links">
                 <li><a href="/Admin/home.php">Home</a></li>
-                <li><a href="/Admin/pages/memberView.php">Member</a></li>
-                <li><a href="/Admin/pages/adminView.php">Admin</a></li>
+                <li><a href="/Admin/memberView.php">Member</a></li>
+                <li><a href="/Admin/adminView.php">Admin</a></li>
                 <li><a href="/Admin/product.php">Product</a></li>
                 <li><a href="/Admin/order.php">Order</a></li>
             </ul>
         <?php elseif ($_user && $_user->adminRole == 'Admin'): ?>
             <ul class="nav-links">
                 <li><a href="/Admin/home.php">Home</a></li>
-                <li><a href="/Admin/pages/memberView.php">Member</a></li>
+                <li><a href="/Admin/memberView.php">Member</a></li>
                 <li><a href="/Admin/product.php">Product</a></li>
                 <li><a href="/Admin/order.php">Order</a></li>
             </ul>

@@ -107,3 +107,4 @@ $('label.upload input[type=file]').on('change', e => {
         e.target.value = '';
     }
 });
+});

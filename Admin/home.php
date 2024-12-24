@@ -24,9 +24,6 @@ GROUP BY oi.prodID, p.prodName
 ORDER BY totalSold DESC
 LIMIT 5;");
 
-
-
-
     $pCount->execute();
     $oCount->execute();
     $totalR->execute();
