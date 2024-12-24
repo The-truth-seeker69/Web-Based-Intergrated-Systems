@@ -32,48 +32,51 @@ $(document).ready(function () {
     });
 });
 
-$(() => {
-    $('[data-get]').on('click', e => {
+
+
+
+
+// Initiate POST request
+$('[data-post]').on('click', e => {
+    e.preventDefault();
+    const url = e.target.dataset.post;
+    const f = $('<form>').appendTo(document.body)[0];
+    f.method = 'POST';
+    f.action = url || location;
+    f.submit();
+});
+
+
+
+
+
+
+$('[data-get]').on('click', e => {
+    e.preventDefault();
+    const url = e.target.dataset.get;
+    console.log('Button clicked! URL:', url); // Debugging output
+    location = url || location;
+});
+
+    
+    // Initiate POST request
+    $('[data-post]').on('click', e => {
         e.preventDefault();
-        const url = e.target.dataset.get;
-        console.log('Button clicked! URL:', url); // Debugging output
-        location = url || location;
-    });
-
-
-// Confirmation message
-$(() => {
-    $('[data-post]').on('click', function (e) {
-        e.preventDefault();
-
-        const confirmMessage = $(this).data('confirm'); // Get confirmation message
-        if (confirmMessage) {
-            const isConfirmed = confirm(confirmMessage); // Show confirmation dialog
-            if (!isConfirmed) {
-                return; // Exit if the user cancels
-            }
-        }
-
-        const url = $(this).data('post'); // Get the URL from data-post
+        const url = e.target.dataset.post;
         const f = $('<form>').appendTo(document.body)[0];
         f.method = 'POST';
         f.action = url || location;
         f.submit();
     });
+
+ // Confirmation message
+ $('[data-confirm]').on('click', e => {
+    const text = e.target.dataset.confirm || 'Are you sure?';
+    if (!confirm(text)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
 });
-    // Confirmation message
-    $('[data-confirm]').on('click', e => {
-        const text = e.target.dataset.confirm || 'Are you sure?';
-        if (!confirm(text)) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-        }
-    });
+
+
 });
-
-
-
-
-
-
-

@@ -3,7 +3,8 @@
 
         <div class="footer-section">
             <h4>About Us</h4>
-            <p>Welcome to Unpopular, where stories come to life. Explore our diverse collection of books for every reader, from timeless classics to modern favorites. Your next great adventure starts here!</p>
+            <p>Welcome to Unpopular, where stories come to life. Explore our diverse collection of books for every
+                reader, from timeless classics to modern favorites. Your next great adventure starts here!</p>
         </div>
 
         <div class="footer-section">

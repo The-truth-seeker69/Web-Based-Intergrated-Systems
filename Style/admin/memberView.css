@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    font-family: 'Playfair Display', serif;
+
+}
+
+#search-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+#search-filter label {
+    margin-top: 10px;
+}
+
+#search-email,
+#filter-status {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+#search-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #555;
+}
+
+table {
+    width: 80%;
+    margin: 1rem auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead tr {
+    background-color: #333;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+table th a {
+    color: inherit;
+    display: block;
+}
+
+table th a.asc::after {
+    content: ' ▴';
+}
+
+table th a.desc::after {
+    content: ' ▾';
+}
+
+/* paging css */
+.pager {
+    padding: 10px;
+    display: flex;
+    border-radius: 8px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pager a {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.pager a:hover {
+    background: #666;
+    color: #fff;
+
+}
+
+.pager a.active {
+    background: #333;
+    color: #fff;
+    cursor: default;
+}
+
+
+
+
+.update-status-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.update-status-wrapper button {
+    padding: 10px 20px;
+    color: black;
+    border-radius: 5px;
+    border: 2px solid #333;
+
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.pagination {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.update-status-wrapper button:hover {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+}

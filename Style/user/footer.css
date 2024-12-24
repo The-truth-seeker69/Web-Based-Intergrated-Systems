@@ -1,13 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* Footer Styles */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 1000px;
+
+}
+
+main {
+    flex: 1;
+}
+
 .footer {
     background-color: #000;
     color: white;
     padding: 40px 20px;
     font-family: 'Playfair Display', serif;
-    margin-top: 3%;
-
+    /* margin-top: 25% */
 }
 
 .footer-container {
@@ -24,6 +39,10 @@
     flex: 1;
     min-width: 300px;
 
+}
+
+.footer-section:nth-of-type(1) {
+    padding-left: 100px;
 }
 
 .footer-section h4 {
