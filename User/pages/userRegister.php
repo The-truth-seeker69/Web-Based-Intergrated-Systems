@@ -12,15 +12,15 @@
 <body>
     <?php 
     require '../../_base.php';
-    $captcha_key = 'admin_registration_captcha';
-    if (!isset($_SESSION['adminFormStage'])) {
-        $_SESSION['adminFormStage'] = 'register';
+    $captcha_key = 'user_registration_captcha';
+    if (!isset($_SESSION['formStage'])) {
+        $_SESSION['formStage'] = 'register';
     }
 
     if(is_post()){
-
+        
         if (isset($_POST['register'])) {
-
+            
         $name=req('name');
         $email = req('email');
         $newPass = req('newPass');
@@ -41,7 +41,7 @@
         }
 
         if(!$_err['name']){
-            $userExist=is_exists($name,'admin','adminName');
+            $userExist=is_exists($name,'user','userName');
             if($userExist){//Username taken
                 $_err['name']='Username is taken.';
             }
@@ -57,8 +57,8 @@
         }
 
         if(!$_err['email']){
-            $emailExist=is_exists($email,'admin','adminemail');
-            if($emailExist){//Username taken
+            $emailExist=is_exists($email,'user','useremail');
+            if($emailExist){//Email taken
                 $_err['email']='Email is already in use.';
             }
         }
@@ -97,8 +97,8 @@
         }
 
         if(!$_err['phone']){
-            $phoneExist=is_exists($phone,'admin','adminphoneno');
-            if($phoneExist){//Username taken
+            $phoneExist=is_exists($phone,'user','userphoneno');
+            if($phoneExist){//Phone num taken
                 $_err['phone']='Phone number is already in use.';
             }
         }
@@ -109,7 +109,6 @@
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
-
         if ($pfp) {
 
             if (!str_starts_with($pfp->type, 'image/')) {
@@ -119,12 +118,12 @@
             }
         } 
 
-        if(!in_array(true, $_err)){//Passed all form validation and ready for db insert  
-            
+        if(!in_array(true, $_err)){//Passed all form validation and ready for db insert
+
             $otp = random_int(100000, 999999);
-            $_SESSION['admin_otp'] = $otp;
-            $_SESSION['admin_otp_expiry'] = time() + 300; // 5 minutes
-            $_SESSION['admin_registration_data'] = [
+            $_SESSION['otp'] = $otp;
+            $_SESSION['otp_expiry'] = time() + 300; // 5 minutes
+            $_SESSION['registration_data'] = [
                 'name' => $name,
                 'email' => $email,
                 'password' => $newPass,
@@ -151,14 +150,15 @@
                 <p>Unpopular</p>
             ";
             $m->send();
-            $_SESSION['adminFormStage'] = 'verify';
-
+            $_SESSION['formStage'] = 'verify';
+ 
         }
+
     }elseif (isset($_POST['verify'])) {
 
-        if (time() > $_SESSION['admin_otp_expiry']) {
-            unset($_SESSION['admin_otp'], $_SESSION['admin_otp_expiry']); // Clear OTP-related session data
-            $_SESSION['adminFormStage'] = 'register'; 
+        if (time() > $_SESSION['otp_expiry']) {
+            unset($_SESSION['otp'], $_SESSION['otp_expiry']); // Clear OTP-related session data
+            $_SESSION['formStage'] = 'register'; 
         }
 
         $inputOtp=req('otpInput');
@@ -166,47 +166,51 @@
             $_err['otpInput']='This field is required!';
         }else{
 
-        if ($inputOtp == $_SESSION['admin_otp'] && time() <= $_SESSION['admin_otp_expiry']) {//otp correct
-            $formData = $_SESSION['admin_registration_data'];
+        if ($inputOtp == $_SESSION['otp'] && time() <= $_SESSION['otp_expiry']) {//otp correct
+            $formData = $_SESSION['registration_data'];
             if($formData['photo']!=null){//insert with image
-                $photo=save_photo_from_data($formData['photo'],'../../image/admin/uploads');
-                $stm=$_db->prepare('INSERT INTO admin (adminName, adminemail, adminpassword, adminphoneno, adminpic, adminRole) VALUES (?, ?, SHA1(?), ?, ?, ?)');
-                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],$photo,'Admin']);
+                $photo=save_photo_from_data($formData['photo'],'../../image/user/uploads');
+                $stm=$_db->prepare('INSERT INTO user (userName, useremail, userpassword, userphoneno, userpic) VALUES (?, ?, SHA1(?), ?, ?)');
+                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],$photo]);
             }else{
-                $stm=$_db->prepare('INSERT INTO admin (adminName, adminEmail, adminPassword, adminPhoneNo, adminRole) VALUES (?, ?, SHA1(?), ?, ?)');
-                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],'Admin']);
+                $stm=$_db->prepare('INSERT INTO user (userName, useremail, userpassword, userphoneno) VALUES (?, ?, SHA1(?), ?)');
+                $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone']]);
             }
 
             if(!empty($success)){
                 if($formData['autofill']){
-                $_SESSION['autofillAdminName'] = $formData['name'];
-                $_SESSION['autofillAdminPass'] = $formData['password'];
+                $_SESSION['autofillName'] = $formData['name'];
+                $_SESSION['autofillPass'] = $formData['password'];
                 }
-                unset($_SESSION['admin_otp'], $_SESSION['admin_otp_expiry'], $_SESSION['admin_registration_data']);
-                $_SESSION['adminFormStage']='register'; // Reset form stage
-                redirect('adminLogin.php');
+                unset($_SESSION['otp'], $_SESSION['otp_expiry'], $_SESSION['registration_data']);
+                $_SESSION['formStage']='register'; // Reset form stage
+                redirect('userLogin.php');
                 
             }
 
         }else{
             $_err['otpInput']='OTP is incorrect!';
-            $_SESSION['adminFormStage'] = 'verify';
+            $_SESSION['formStage'] = 'verify';
         }
-    }
 
+        
+
+        }
     }
 
     }
     ?>
     <div id="mainPanel">
-    <?php if ($_SESSION['adminFormStage'] === 'register'): ?>
+
+    <?php if ($_SESSION['formStage'] === 'register'): ?>
+
         <form method="post" enctype="multipart/form-data" id="loginForm">
-            <div><h2>Create New Admin</h2></div>
+            <div><h2>Create Your Account</h2></div>
 
             <div class="picrow">
             <label class="profilepic">
             <?= html_file('photo', 'image/*', 'hidden') ?>
-            <img src="../../image/admin/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
+            <img src="../../image/user/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
             </label>
             </div>
 
@@ -217,7 +221,7 @@
             <div class="picrow">
                 <?= err('photo')?>
             </div>
-
+            
             <div class="row">
 
             <div class="input-group">
@@ -268,13 +272,13 @@
             <div class="row">
             <?= err('phone')?>
             </div>
-
+            
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php?form_type=admin_registration" alt="CAPTCHA" />
+            <img src="../../lib/captcha.php?form_type=user_registration" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
-
+                    
             <div class="actions">
                 <label >
                 <?= html_checkbox('autofill')?> Autofill login
@@ -282,10 +286,11 @@
                 
             </div>
 
-            <button type="submit" class="btn" name="register">Confirm</button>
+            <button type="submit" class="btn" name="register" >Confirm</button>
 
         </form>
-        <?php elseif ($_SESSION['adminFormStage'] === 'verify'): ?>
+
+        <?php elseif ($_SESSION['formStage'] === 'verify'): ?>
 
         <form method="post" action="">
             <p>An OTP has been sent to your email. </p><p>Please enter it below to activate your account:</p>
@@ -298,6 +303,7 @@
         </form>
 
         <?php endif; ?>
+
     </div>
 
     <div id="signupLink">

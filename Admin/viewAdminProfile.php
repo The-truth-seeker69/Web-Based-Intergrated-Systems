@@ -2,7 +2,7 @@
 // Start the session
 
 // Include necessary files
-include "../header.php";
+include "header.php";
 
 
 // Check what session variables are set

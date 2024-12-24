@@ -4,7 +4,7 @@
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 // Include necessary files
-include "../header.php";
+include "header.php";
 
 
 // Check what session variables are set
@@ -74,8 +74,8 @@ if (is_post()) {
     // db operation
     if (!$_err) {
         if ($f) {
-            unlink("../../image/admin/uploads/$photo");
-            $photo = save_photo($f, '../../image/admin/uploads');
+            unlink("../image/admin/uploads/$photo");
+            $photo = save_photo($f, '../image/admin/uploads');
         }
 
         $stm = $_db->prepare('
