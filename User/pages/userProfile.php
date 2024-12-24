@@ -96,8 +96,7 @@ if (is_post()) {
 
         temp('info', 'User Details updated');
         redirect('/User/page/userProfile.php');
-    }else{
-        
+    } else {
     }
 }
 ?>
@@ -138,9 +137,9 @@ if (is_post()) {
                 </div>
                 <div class='error'>
                     <?php
-                        if(isset($_err['userEmail']) && $_err['userEmail'] != null){
-                            echo "<b><p>" . $_err['userEmail'] . "</p></b>";
-                        }
+                    if (isset($_err['userEmail']) && $_err['userEmail'] != null) {
+                        echo "<b><p>" . $_err['userEmail'] . "</p></b>";
+                    }
                     ?>
                 </div>
 
@@ -151,9 +150,9 @@ if (is_post()) {
                 </div>
                 <div class='error'>
                     <?php
-                        if(isset($_err['userName'])){
-                            echo "<b><p>" . $_err['userName'] . "</p></b>";
-                        }
+                    if (isset($_err['userName'])) {
+                        echo "<b><p>" . $_err['userName'] . "</p></b>";
+                    }
                     ?>
                 </div>
                 <div class="info-row">
@@ -163,9 +162,9 @@ if (is_post()) {
                 </div>
                 <div class='error'>
                     <?php
-                        if(isset($_err['userPhoneNo'])){
-                            echo "<b><p>" . $_err['userPhoneNo'] . "</p></b>";
-                        }
+                    if (isset($_err['userPhoneNo'])) {
+                        echo "<b><p>" . $_err['userPhoneNo'] . "</p></b>";
+                    }
                     ?>
                     <br><br>
                 </div>
@@ -179,28 +178,28 @@ if (is_post()) {
     </div>
 
     <script>
-    // Preview photo
-    $('label.upload input[type=file]').on('change', e => {
-        const f = e.target.files[0];
-        const img = $(e.target).siblings('img')[0];
-        if (!img) return;
+        // Preview photo
+        $('label.upload input[type=file]').on('change', e => {
+            const f = e.target.files[0];
+            const img = $(e.target).siblings('img')[0];
+            if (!img) return;
 
-        img.dataset.src ?? = img.src;
+            img.dataset.src ?? = img.src;
 
-        if (!f) {
-            // If no file is selected
-            return;
-        }
+            if (!f) {
+                // If no file is selected
+                return;
+            }
 
-        if (f.type.startsWith('image/')) {
-            // Set the new image URL as preview
-            img.src = URL.createObjectURL(f);
-        } else {
-            // Reset to the default image if the file is not valid
-            img.src = img.dataset.src;
-            e.target.value = ''; // Clear the file input value
-        }
-    });
+            if (f.type.startsWith('image/')) {
+                // Set the new image URL as preview
+                img.src = URL.createObjectURL(f);
+            } else {
+                // Reset to the default image if the file is not valid
+                img.src = img.dataset.src;
+                e.target.value = ''; // Clear the file input value
+            }
+        });
     </script>
 </body>
 

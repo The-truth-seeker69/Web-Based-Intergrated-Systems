@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_user = $_SESSION['user'] ?? null;
+$_user = $_SESSION['user'] ?? null; 
 function is_post()
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -304,6 +304,51 @@ function html_checkbox($key, $label = '', $attr = '')
     echo "<label><input type='checkbox' id='$key' name='$key' value='1' $status $attr>$label</label>";
 }
 
+
+
+
+// Generate <input type='text'>
+function html_email($key, $attr = '') {
+    $value = encode($GLOBALS[$key] ?? '');
+    echo "<input type='email' id='$key' name='$key' value='$value' $attr>";
+}
+
+function get_mail() {
+    require_once 'lib/PHPMailer.php';
+    require_once 'lib/SMTP.php';
+
+    $m = new PHPMailer(true);
+    $m->isSMTP();
+    $m->SMTPAuth = true;
+    $m->Host = 'smtp.gmail.com';
+    $m->Port = 587;
+    $m->Username = 'liaw.casual@gmail.com';
+    $m->Password = 'buvq yftx klma vezl';
+    $m->CharSet = 'utf-8';
+    $m->setFrom($m->Username, 'Unpopular');
+
+    return $m;
+}
+
+function save_photo_from_data($data, $folder, $width = 200, $height = 200) {
+    // Create a temporary file
+    $tempFile = tempnam(sys_get_temp_dir(), 'img');
+
+    // Write the raw image data to the temporary file
+    file_put_contents($tempFile, $data);
+
+    // Use the original save_photo function to process the temporary file
+    $photo = save_photo((object) ['tmp_name' => $tempFile, 'type' => 'image/jpeg'], $folder, $width, $height);
+
+    // Clean up the temporary file after processing
+    unlink($tempFile);
+
+    return $photo;
+}
+
+function base($path = '') {
+    return "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/$path";
+}
 
 function is_get()
 {
