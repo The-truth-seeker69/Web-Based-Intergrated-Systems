@@ -46,7 +46,7 @@
             </div>
 
             <?php else: ?>
-            <a href="#login" class="nav-item">
+            <a href="../../loginPortal.php" class="nav-item">
                 <i class="fas fa-user"></i> Login / Register
             </a>
 
