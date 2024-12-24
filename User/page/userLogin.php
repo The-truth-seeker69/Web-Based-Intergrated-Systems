@@ -20,6 +20,7 @@
         $user = $stm->fetch();
     
         if ($user) {
+            $_SESSION['user'] = $user;
             $_SESSION['userId'] = $user->userID;
             $_SESSION['userName'] = $user->userName;
             redirect('../index.php');
@@ -65,25 +66,32 @@
                     $_err['captcha'] = 'CAPTCHA is incorrect!';
                 }
 
-                if($user){//Username and password match
-                     
-                        $_SESSION['userId']=$user->userID;
-                        $_SESSION['userName']=$user->userName;
+                if($user){//password and username match
 
-                        if ($remember) {
-                            // Generate a remember-me token
-                            $remember_token = bin2hex(random_bytes(32)); // 32 bytes = 64 characters in hex
-                            $stm = $_db->prepare('UPDATE user SET rememberToken = ? WHERE userID = ?');
-                            $stm->execute([$remember_token, $user->userID]);
-                            setcookie('remember_token', $remember_token, time() + (15 * 60), '/', '', true, true);//15minutes http only cookie
-                        } 
+                    if($user->userStatus=='Inactive'){
+                        $_err['status'] = 'Your account has been restricted!';
+                    }else{
+                        
+                            $_SESSION['user']=$user;
+                            $_SESSION['userId']=$user->userID;
+                            $_SESSION['userName']=$user->userName;
+    
+                            if ($remember) {
+                                // Generate a remember-me token
+                                $remember_token = bin2hex(random_bytes(32)); // 32 bytes = 64 characters in hex
+                                $stm = $_db->prepare('UPDATE user SET rememberToken = ? WHERE userID = ?');
+                                $stm->execute([$remember_token, $user->userID]);
+                                setcookie('remember_token', $remember_token, time() + (15 * 60), '/', '', true, true);//15minutes http only cookie
+                            } 
+                            temp('info',"Welcome back, $user->userName.");
+                            redirect('../../index.php');
 
-                        redirect('../../index.php');
-                    
+                    }
+
                 }else{
                     $_err['unmatch']='Username or password is invalid!';
                 }
-
+                
         }
     }
     ?>
@@ -109,6 +117,7 @@
             <img src="../../lib/captcha.php?form_type=user_login" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
+            <?= err('status')?>
             <div class="actions">
                 <label>
                     <?= html_checkbox('remember')?> Remember Me

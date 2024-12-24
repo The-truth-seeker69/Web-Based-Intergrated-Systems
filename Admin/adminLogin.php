@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Style/general/login.css">
+    <link rel="stylesheet" href="../Style/general/login.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>Admin Login</title>
 </head>
 <body>
     <?php 
-    require '../../_base.php';
+    require '../_base.php';
     $captcha_key = 'admin_login_captcha';
         if (isset($_COOKIE['remember_token_admin'])) {
             $token = $_COOKIE['remember_token_admin'];
@@ -20,25 +20,26 @@
             $admin = $stm->fetch();
         
             if ($admin) {
+                $_SESSION['admin'] = $admin;
                 $_SESSION['adminId'] = $admin->adminID;
                 $_SESSION['adminName'] = $admin->adminName;
-                redirect('../../index.php');
+                redirect('../index.php');
             }
         }
     
         if (isset($_SESSION['autofillAdminName'])) {
-            $GLOBALS['adminName'] = $_SESSION['autofillAdminName']; 
+            $GLOBALS['name'] = $_SESSION['autofillAdminName']; 
             unset($_SESSION['autofillAdminName']); 
         }
         if (isset($_SESSION['autofillAdminPass'])) {
-            $GLOBALS['adminPass'] = $_SESSION['autofillAdminPass']; 
+            $GLOBALS['pass'] = $_SESSION['autofillAdminPass']; 
             unset($_SESSION['autofillAdminPass']); 
         }
 
     if(is_post()){
         
-        $name=req('adminName');
-        $pass=req('adminPass');
+        $name=req('name');
+        $pass=req('pass');
         $remember=req('remember');
         $captcha=req('captcha');
 
@@ -58,7 +59,7 @@
 
         if(!$_err){
             
-                $stm=$_db->prepare('SELECT * FROM admin WHERE adminname=? AND adminPassword=SHA1(?)');
+                $stm=$_db->prepare('SELECT * FROM admin WHERE adminName=? AND adminPassword=SHA1(?)');
                 $stm->execute([$name,$pass]);
                 $admin=$stm->fetch();
                 
@@ -69,6 +70,7 @@
                 if($admin){
                         temp('info', 'Login successfully');
                         
+                        $_SESSION['admin']=$admin;
                         $_SESSION['adminId']=$admin->adminID;
                         $_SESSION['adminName']=$admin->adminName;
 
@@ -79,15 +81,11 @@
                             $stm->execute([$remember_token, $admin->adminID]);
                             setcookie('remember_token_admin', $remember_token, time() + (15 * 60), '/', '', true, true);//15minutes http only cookie
                         } 
-                        login($admin,'../home.php');
-                        redirect('../../index.php');
+                        login($admin,'home.php');
                     
                 }else{
                     $_err['unmatch']='Username or password is invalid!';
                 }
-
-            
-
         }
     }
     ?>
@@ -97,13 +95,13 @@
             <div><h2>Admin Login</h2></div>
             <div class="input-group">
             <i class="fa-solid fa-user"></i>
-                <?= html_text('adminName','placeholder="Username"')?>
+                <?= html_text('name','placeholder="Username"')?>
             </div>
             <?= err('name')?>
 
             <div class="input-group">
             <i class="fa-solid fa-lock"></i>
-                <?= html_password('adminPass','placeholder="Password"')?>
+                <?= html_password('pass','placeholder="Password"')?>
             </div>
             <?= err('pass')?>
             <?= err('unmatch')?>
@@ -118,7 +116,7 @@
                 <label>
                 <?= html_checkbox('remember')?> Remember Me
                 </label>
-                <a href="#" class="forgot-password">Forgot Password?</a>
+                <a href="adminReset.php" class="forgot-password">Forgot Password?</a>
             </div>
 
             <button type="submit" class="login-btn">Login</button>
@@ -129,7 +127,7 @@
     <div id="signupLink">
         
         <div>or</div>
-        <div id="back"><a href="../../index.php">Back To Home</a></div>
+        <div id="back"><a href="../index.php">Back To Home</a></div>
     </div>
     
 </body>

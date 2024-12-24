@@ -17,9 +17,7 @@
 
     <div id="b1"><a href="User/page/userLogin.php">Login as Member to enjoy full privilege</a></div>
 
-    <div id="b2"><a href="adminLogin.php">Login as Admin</a></div>
-
-    <div id="l1">Don't have an account?&nbsp;<a href="">Register now!</a></div>
+    <div id="b2"><a href="Admin/adminLogin.php">Login as Admin</a></div>
 
     <div id="or">or</div>
 

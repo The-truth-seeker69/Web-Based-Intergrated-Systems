@@ -16,6 +16,9 @@ switch ($form_type) {
     case 'user_reset':
         $session_key = 'user_reset_captcha';
         break;
+    case 'admin_reset':
+        $session_key = 'admin_reset_captcha';
+        break;
     default:
         $session_key = 'user_login_captcha';
         break;

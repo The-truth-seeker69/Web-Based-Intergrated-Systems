@@ -33,7 +33,7 @@
             <li><a href="#">放爽</a></li>
         </ul>
         <div id="header-utility">
-            <a href="#login" class="nav-item">
+            <a href="../../loginPortal.php" class="nav-item">
                 <i class="fas fa-user"></i> Login / Register
             </a>
 

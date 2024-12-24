@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Style/general/register.css">
+    <link rel="stylesheet" href="../Style/general/register.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../../script/register.js"></script>
+    <script src="../script/register.js"></script>
     <title>Create Account</title>
 </head>
 <body>
     <?php 
-    require '../../_base.php';
+    require '../_base.php';
     $captcha_key = 'admin_registration_captcha';
     if (!isset($_SESSION['adminFormStage'])) {
         $_SESSION['adminFormStage'] = 'register';
@@ -169,7 +169,7 @@
         if ($inputOtp == $_SESSION['admin_otp'] && time() <= $_SESSION['admin_otp_expiry']) {//otp correct
             $formData = $_SESSION['admin_registration_data'];
             if($formData['photo']!=null){//insert with image
-                $photo=save_photo_from_data($formData['photo'],'../../image/admin/uploads');
+                $photo=save_photo_from_data($formData['photo'],'../image/admin/uploads');
                 $stm=$_db->prepare('INSERT INTO admin (adminName, adminemail, adminpassword, adminphoneno, adminpic, adminRole) VALUES (?, ?, SHA1(?), ?, ?, ?)');
                 $success=$stm->execute([$formData['name'],$formData['email'],$formData['password'],$formData['phone'],$photo,'Admin']);
             }else{
@@ -206,7 +206,7 @@
             <div class="picrow">
             <label class="profilepic">
             <?= html_file('photo', 'image/*', 'hidden') ?>
-            <img src="../../image/admin/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
+            <img src="../image/admin/uploads/ppplaceholder.png" id="profilepic" alt="Profile Picture">
             </label>
             </div>
 
@@ -271,7 +271,7 @@
 
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php?form_type=admin_registration" alt="CAPTCHA" />
+            <img src="../lib/captcha.php?form_type=admin_registration" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
 
@@ -303,7 +303,7 @@
     <div id="signupLink">
         
         <div>or</div>
-        <div id="back"><a href="../../index.php">Continue As Guest</a></div>
+        <div id="back"><a href="../index.php">Continue As Guest</a></div>
     </div>
     
 </body>
