@@ -5,8 +5,7 @@
 include "header.php";
 
 
-// Check what session variables are set
-auth();
+
 
 
 if (is_get()) {
