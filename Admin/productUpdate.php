@@ -1,7 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $prodID = req('prodID');
 
@@ -15,8 +14,7 @@ $stm1->execute([$prodID]);
 $images = $stm1->fetchAll();
 
 
-
-
+//retrieve value
 $prodName = $s->prodName;
 $prodAuthor = $s->prodAuthor;
 $prodDesc = $s->prodDesc;
@@ -147,7 +145,7 @@ if (is_post()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $_title ?></title>
-    <link rel="stylesheet" href="AdminCss/updateProduct.css">
+    <link rel="stylesheet" href="../Style/admin/updateProduct.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 

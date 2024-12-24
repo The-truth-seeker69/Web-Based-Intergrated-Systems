@@ -1,7 +1,6 @@
 <?php
 $_title = 'Shipping';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $shippingMethodID = req('shippingMethodID');
 // Fetch product data
@@ -91,7 +90,7 @@ if(is_post()){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $_title ?></title>
-    <link rel="stylesheet" href="AdminCss/updateShipping.css">
+    <link rel="stylesheet" href="../Style/admin/updateShipping.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

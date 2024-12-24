@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Style/general/register.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <title>Create Account</title>
 </head>
 <body>
     <?php 
+    $_title = 'Create Account';
     require '../../_base.php';
     if(is_post()){
 

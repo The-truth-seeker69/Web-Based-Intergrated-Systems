@@ -1,7 +1,6 @@
 <?php
-$_title = 'Category';  // Set page title
-require '../_base.php';
-include '../head.php';
+$_title = 'Shipping';  // Set page title
+include 'header.php';
 
 //remember make sure only can upload the img only
 if (is_post()) {
@@ -67,7 +66,7 @@ if (is_post()) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addShipping.css">
+    <link rel="stylesheet" href="../Style/admin/addShipping.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -97,7 +96,7 @@ if (is_post()) {
     <section>
         <button type="submit">Submit</button>
         <button type="reset">Reset</button>
-        <button type="button" onclick="window.location.href='shipping.php'">Back To Category List</button>  <!-- Redirect with JavaScript -->
+        <button type="button" onclick="window.location.href='shipping.php'">Back To Shipping List</button>  <!-- Redirect with JavaScript -->
     </section>
 </form>
 

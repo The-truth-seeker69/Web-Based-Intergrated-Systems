@@ -1,7 +1,6 @@
 <?php
 $_title = 'Discount';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $item = req('item'); // searching purpose
 $discountCodeID = req('discountCodeID');
@@ -59,8 +58,8 @@ foreach ($expiredDiscounts as $expired) {
 
 
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css">
-    <link rel="stylesheet" href="AdminCss/shipping.css"> <!-- same design some direct use the shipping.css design -->
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/shipping.css"> <!-- same design some direct use the shipping.css design -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -110,7 +109,7 @@ foreach ($expiredDiscounts as $expired) {
                         <button data-get="discountUpdate.php?discountCodeID=<?= $s->discountCodeID ?>"
                             class="update">Update</button>
                         <button type="submit"
-                            data-confirm="Are you sure you want to delete this discount method?">Delete</button>
+                        data-confirmation="Are you sure you want to delete this discount method?">Delete</button>
                     </form>
                 </td>
             </tr>

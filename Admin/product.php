@@ -1,7 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $item = req('item'); // req for item id
 $viewAll = req('view_all') === 'true'; // check if view_all is set and compare
@@ -37,8 +36,8 @@ if ($productsOutOfStock) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css">
-    <link rel="stylesheet" href="AdminCss/product.css">
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/product.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -95,13 +94,12 @@ if ($productsOutOfStock) {
     <!-- Delete Button -->
     <button class="deleteButton <?= ($s->prodStatus === 'Unavailable') ? 'active' : '' ?>"
         data-post="productDelete.php?prodID=<?= $s->prodID ?>"
-        data-confirm="Are you sure you want to delete?">
+        data-confirm="Are you sure ?">
         <?= ($s->prodStatus === 'OutOfStock') ? 'Restore' : '' ?>
         <?= ($s->prodStatus === 'Available') ? 'Delete' : '' ?>
         <?= ($s->prodStatus === 'Unavailable') ? 'Active' : '' ?>
     </button>
 </td>
-
 
                 </td>
             </tr>
@@ -109,5 +107,5 @@ if ($productsOutOfStock) {
     </table>
 </main>
 </body>
-
 </html>
+

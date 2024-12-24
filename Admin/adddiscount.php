@@ -1,7 +1,6 @@
 <?php
 $_title = 'Discount';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 //remember make sure only can upload the img only
 if (is_post()) {
@@ -74,7 +73,7 @@ if (is_post()) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addCategory.css">
+    <link rel="stylesheet" href="../Style/admin/addCategory.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 

@@ -1,7 +1,6 @@
 <?php
 $_title = 'Discount';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $discountCodeID = req('discountCodeID');
 
@@ -84,7 +83,7 @@ $s = $stm->fetch();
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addProduct.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="../Style/admin/addProduct.css"> <!-- Link to your CSS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 

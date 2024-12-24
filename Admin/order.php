@@ -1,7 +1,6 @@
 <?php
 $_title = 'Order';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $item = req('item'); // Get the search input from the user
 $orderStatus = req('orderStatus');  // Get the order status filter from the user (if set)
@@ -46,8 +45,8 @@ if (is_post()) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css">
-    <link rel="stylesheet" href="AdminCss/order.css">
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/order.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -84,6 +83,7 @@ if (is_post()) {
         <!-- Left-aligned buttons -->
         <div style="display: flex; gap: 10px;">
             <a href="discount.php" id="discount" class="button">Discount</a>
+            <a href="shipping.php" id="discount" class="button">Shipping</a>
         </div>
     </div>
 

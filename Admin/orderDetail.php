@@ -1,7 +1,6 @@
 <?php
 $_title = 'Order';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $orderID = req('orderID');
 
@@ -15,7 +14,7 @@ $s = $stm->fetch();
 
 
 <head>
-    <link rel="stylesheet" href="AdminCss/viewOrder.css"> 
+    <link rel="stylesheet" href="../Style/admin/viewOrder.css"> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 

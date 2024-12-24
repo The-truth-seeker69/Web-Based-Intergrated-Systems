@@ -1,7 +1,6 @@
 <?php
 $_title = 'Category';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $item = req('item');
 
@@ -18,16 +17,9 @@ $arr = $stm->fetchAll();
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css">
-    <link rel="stylesheet" href="AdminCss/category.css">
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/category.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-    <Style>
-
-
-
-    </Style>
 </head>
 
 <main>

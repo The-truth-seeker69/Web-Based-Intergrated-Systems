@@ -1,7 +1,6 @@
 <?php
 $_title = 'Category';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $categoryID = req('categoryID');
 

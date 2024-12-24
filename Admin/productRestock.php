@@ -1,7 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $prodID = req('prodID');
 $quantity = $_POST['quantity'] ?? 0;

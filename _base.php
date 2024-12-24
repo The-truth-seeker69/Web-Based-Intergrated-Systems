@@ -1,7 +1,10 @@
 <?php
-date_default_timezone_set('Asia/Kuala_Lumpur');
+
 session_start();
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
 $_user = $_SESSION['user'] ?? null;
+
 function is_post()
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -49,8 +52,7 @@ function html_file($key, $accept = '', $attr = '')
 
 
 // Generate <textarea>
-function html_textarea($key, $attr = '')
-{
+function html_textarea($key, $attr = '') {
     $value = encode($GLOBALS[$key] ?? '');  // Get the value from global variable
     echo "<textarea id='$key' name='$key' $attr>$value</textarea>";  // Generate the <textarea> element
 }

@@ -1,24 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
-
-// // function generate_product_id($pID) {  
-// function generate_product_id($pID) {  // 
-//     //Use $pID as the parameter for PDO connection
-//     // Query to get the highest product ID
-//     $stmt = $pID->query('SELECT MAX(prodID) AS max_id FROM product');
-//     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-//     $last_id = $row['max_id'] ?? 'PD0000'; 
-        
-//     // Extract the number part and increment it
-//     $new_number = str_pad((int) substr($last_id, 2) + 1, 4, '0', STR_PAD_LEFT);
-        
-//     // Format the new product ID as 'PD0001', 'PD0002', etc.
-//     return 'PD' . $new_number;
-
-//     }
+include 'header.php';
 
 //remember make sure only can upload the img only
 if (is_post()) {
@@ -136,7 +118,7 @@ foreach ($files['name'] as $key => $fileName) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/addProduct.css">
+    <link rel="stylesheet" href="../Style/admin/addProduct.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 

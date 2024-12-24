@@ -1,7 +1,6 @@
 <?php
 $_title = 'Product';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $prodID = req('prodID');
 
@@ -34,12 +33,8 @@ try {
 
 
 <head>
-    <link rel="stylesheet" href="AdminCss/viewProduct.css"> 
+    <link rel="stylesheet" href="../Style/admin/viewProduct.css"> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-
-
-</style>
 </head>
 
 <body>

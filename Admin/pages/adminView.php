@@ -43,12 +43,7 @@ $params = [
 require_once '../../lib/SimplePager.php';
 $p = new SimplePager($sql, $params, 10, $page);
 $arr = $p->result;
-
-
 ?>
-
-
-
 
 <main>
     <form id="search-filter">

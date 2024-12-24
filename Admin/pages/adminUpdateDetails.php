@@ -1,14 +1,12 @@
 <?php
 // Start the session
 session_start();
-
+$_title = 'Register';
 // Include necessary files
 include "../header.php";
 
 
 // Check what session variables are set
-
-
 
 if (is_get()) {
     $adminID = $_GET['id'];

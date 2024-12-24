@@ -1,7 +1,6 @@
 <?php
 $_title = 'Shippig';  // Set page title
-require '../_base.php';
-include '../head.php';
+include 'header.php';
 
 $item = req('item');
 $shippingID = req('shippingMethodID');
@@ -30,8 +29,8 @@ if (is_post()) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="AdminCss/adminTable.css">
-    <link rel="stylesheet" href="AdminCss/shipping.css">
+    <link rel="stylesheet" href="../Style/admin/adminTable.css">
+    <link rel="stylesheet" href="../Style/admin/shipping.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
