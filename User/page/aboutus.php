@@ -1,4 +1,46 @@
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.5428949349675!2d101.72400367447047!3d3.213953552751904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc386bb5535b83%3A0x2d08b6c5b6fd0155!2sTAR%20UMT%20Cyber%20Centre%20(CITC)!5e0!3m2!1sen!2smy!4v1735001733119!5m2!1sen!2smy" 
-    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+<?php
+require "../../_base.php";
+include "header.php";
+?>
+<div id="about-us-container">
+
+    <div id="about-us-hero">
+        <h1>About Us
+        </h1>
+    </div>
+
+
+
+    <div id="imagetext-display-1">
+        <div id="imagetext-image">
+            <img src="../../image/user/display/img1.jpg" alt="Image 3">
+        </div>
+        <div id="imagetext-text">
+            <h3>Reading gives us someplace to go when we have to stay where we are.</h3>
+
+        </div>
+
+    </div>
+
+    <div id="imagetext-display-2">
+        <div id="imagetext-image">
+            <img src="./image/user/display/img4.jpg" alt="Image 3">
+
+        </div>
+        <div id="imagetext-text">
+            <h3>Books wash away from the soul the dust of everyday life.</h3>
+            <button><a href="#">Shop now!</a></button>
+        </div>
+
+    </div>
+
+    <div id="imagetext-display-1">
+        <div id="imagetext-image">
+            <img src="./image/user/display/img2.jpg" alt="Image 3">
+        </div>
+        <div id="imagetext-text">
+            <h3>Lose yourself in a book, find yourself in the story.</h3>
+            <button><a href="#">Shop now! </a></button>
+        </div>
+
+    </div>
