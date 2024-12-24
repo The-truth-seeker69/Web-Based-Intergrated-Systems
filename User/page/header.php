@@ -2,8 +2,6 @@
 <html lang="en">
 <?php @include "../../_base.php" ?>
 <?php @include "_base.php" ?>
-<?php @include "../../_base.php" ?>
-<?php @include "_base.php" ?>
 
 <head>
     <meta charset="UTF-8">
