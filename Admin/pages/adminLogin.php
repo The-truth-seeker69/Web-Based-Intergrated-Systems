@@ -10,9 +10,7 @@
     <?php 
     $_title = 'Admin Login';
     require '../../_base.php';
-        $name=req('name');
-        $pass=req('pass');
-
+    $captcha_key = 'admin_login_captcha';
         if (isset($_COOKIE['remember_token_admin'])) {
             $token = $_COOKIE['remember_token_admin'];
         
@@ -54,7 +52,7 @@
 
         if (empty($captcha)) {
             $_err['captcha'] = 'CAPTCHA is required!';
-        } else if ($_SESSION['captcha'] !== $captcha) {
+        } else if ($_SESSION[$captcha_key] !== $captcha) {
             $_err['captcha'] = 'CAPTCHA is incorrect!';
         }
 
@@ -64,7 +62,7 @@
                 $stm->execute([$name,$pass]);
                 $admin=$stm->fetch();
                 
-                if ($_SESSION['captcha'] !== $captcha) {
+                if ($_SESSION[$captcha_key] !== $captcha) {
                     $_err['captcha'] = 'CAPTCHA is incorrect!';
                 }
 
@@ -112,7 +110,7 @@
 
             <div id="captchabox">
             <?= html_text('captcha','placeholder="Enter what you see"')?>
-            <img src="../../lib/captcha.php" alt="CAPTCHA" />
+            <img src="../../lib/captcha.php?form_type=admin_login" alt="CAPTCHA" />
             </div>
             <?= err('captcha')?>
 

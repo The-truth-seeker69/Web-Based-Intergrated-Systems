@@ -67,5 +67,43 @@ $(() => {
         e.stopImmediatePropagation();
     }
 });
+//confirmation update selected user
+$('[data-confirm-update]').on('click', e => {
+    const text = e.target.dataset.confirm || 'Are you sure you want to update the status of the selected users?';
+    if (!confirm(text)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
+});
 
+// Set or get temporary session variable
+
+function temp($key, $value = null) {
+    if ($value !== null) {
+        $_SESSION["temp_$key"] = $value;
+    } else {
+        $value = $_SESSION["temp_$key"] ?? null;
+        unset($_SESSION["temp_$key"]);
+        return $value;
+    }
+}
+
+
+
+// photo preview
+$('label.upload input[type=file]').on('change', e => {
+    const f = e.target.files[0];
+    const img = $(e.target).siblings('img')[0];
+
+    if (!img) return;
+
+    img.dataset.src ??= img.src;
+
+    if (f?.type.startsWith('image/')) {
+        img.src = URL.createObjectURL(f);
+    }
+    else {
+        img.src = img.dataset.src;
+        e.target.value = '';
+    }
 });

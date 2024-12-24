@@ -1,0 +1,83 @@
+#update-admin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+#admin-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 50%;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+}
+
+.formgroup input[type="text"],
+.formgroup input[type="email"],
+.formgroup input[type="file"],
+.formgroup button {
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formgroup input[type="text"]:focus,
+.formgroup input[type="email"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn {
+    display: inline-block;
+    text-align: center;
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.cancel-btn:hover {
+    background-color: #c12f28;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.fixed-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Ensures the image is cropped and maintains aspect ratio */
+    border-radius: 50%; /* Optional: Makes the image circular */
+}
